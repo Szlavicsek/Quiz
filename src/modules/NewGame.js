@@ -1,4 +1,4 @@
-import GameLogic from "./Gamelogic.js"
+import GameLogic from "./GameLogic.js"
 import MainMenu from "./Mainmenu.js"
 const $documentBody = document.querySelector('body');
 
