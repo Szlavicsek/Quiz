@@ -6,8 +6,6 @@ import {
 
 const NewGame = (() => {
 
-  // let overlayIsOpen = false;
-
   const state = {
     difficulty: "medium",
     quantity: 10,
@@ -17,61 +15,31 @@ const NewGame = (() => {
     maxAvaliable: undefined
   }
 
-  // const renderMain = (e) => {
-  //   if (event.target.matches(".button-back--newGame")) {
-  //     $documentBody.innerHTML = `
-  //     <div class="menu-wrapper">
-  //       <div class="menu-content">
-  //         <header>
-  //           <h1 class="title">Quizzit</h1>
-  //           <img class="circles" src="src/assets/header-circles-res.png" alt="">
-  //           <img src="src/assets/1x/ribbon-yellow.png" class="ribbon">
-  //         </header>
-  //         <main class="button-group">
-  //           <button class="button-new-game">New Game</button>
-  //           <button class="button-about">About</button>
-  //           <button class="button-settings">Settings</button>
-  //         </main>
-  //       </div>
-  //       <footer class="footer">
-  //         <p>Doncimacko 2018 &copy;</p>
-  //       </footer>
-  //     </div>
-  //     `
-  //   }
-  // };
-
-  const difficultyClickEvent = (e) => {
-    if (e.target.matches(".button-difficulty")) {
-      const $difficultyOverlay = document.querySelector('.options-overlay--difficulty');
-      $difficultyOverlay.style.display = "block";
-      setTimeout(function() {
-        $difficultyOverlay.style.opacity = "1";
-      }, 1);
-      state.overlayIsOpen = true;
-    }
+  const difficultyClickEvent = () => {
+    const $difficultyOverlay = document.querySelector('.options-overlay--difficulty');
+    $difficultyOverlay.style.display = "block";
+    setTimeout(function() {
+      $difficultyOverlay.style.opacity = "1";
+    }, 1);
+    state.overlayIsOpen = true;
   }
 
-  const categoryClickEvent = (e) => {
-    if (e.target.matches(".button-category")) {
-      const $categoriesOverlay = document.querySelector('.options-overlay--category');
-      $categoriesOverlay.style.display = "block";
-      setTimeout(function() {
-        $categoriesOverlay.style.opacity = "1";
-      }, 1);
-      state.overlayIsOpen = true;
-    }
+  const categoryClickEvent = () => {
+    const $categoriesOverlay = document.querySelector('.options-overlay--category');
+    $categoriesOverlay.style.display = "block";
+    setTimeout(function() {
+      $categoriesOverlay.style.opacity = "1";
+    }, 1);
+    state.overlayIsOpen = true;
   }
 
-  const quantityClickEvent = (e) => {
-    if (e.target.matches(".button-quantity")) {
-      const $quantityOverlay = document.querySelector('.options-overlay--quantity');
-      $quantityOverlay.style.display = "block";
-      setTimeout(function() {
-        $quantityOverlay.style.opacity = "1";
-      }, 1);
-      state.overlayIsOpen = true;
-    }
+  const quantityClickEvent = () => {
+    const $quantityOverlay = document.querySelector('.options-overlay--quantity');
+    $quantityOverlay.style.display = "block";
+    setTimeout(function() {
+      $quantityOverlay.style.opacity = "1";
+    }, 1);
+    state.overlayIsOpen = true;
   }
 
   const closeOverlay = (overlay) => {
@@ -207,19 +175,22 @@ const NewGame = (() => {
     return json
   }
 
-  const initNewGame = (e) => {
-    if (e.target.matches(".button-play")) {
-
-    }
-  }
+  const initNewGame = (e) => {}
 
   const eventListeners = () => {
-    window.addEventListener("click", difficultyClickEvent);
-    window.addEventListener("click", categoryClickEvent);
-    window.addEventListener("click", quantityClickEvent);
-    window.addEventListener("click", selectFromOverlay);
-    window.addEventListener("click", renderMain);
-    window.addEventListener("click", initNewGame);
+    window.addEventListener("click", function(e) {
+      if (e.target.matches(".button-difficulty")) {
+        difficultyClickEvent();
+      } else if (e.target.matches(".button-category")) {
+        categoryClickEvent();
+      } else if (e.target.matches(".button-quantity")) {
+        quantityClickEvent();
+      } else if (e.target.matches(".button-back--newGame")) {
+        renderMain();
+      } else {
+        selectFromOverlay(e);
+      }
+    })
   }
 
   const init = () => {
