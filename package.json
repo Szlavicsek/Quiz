@@ -1,0 +1,20 @@
+{
+  "name": "quizzit",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Peter Pataki",
+  "license": "MIT",
+  "devDependencies": {
+    "css-loader": "^1.0.0",
+    "node-sass": "^4.9.3",
+    "sass-loader": "^7.1.0",
+    "webpack": "^4.17.0"
+  },
+  "dependencies": {
+    "json-sass": "^1.3.5"
+  }
+}
