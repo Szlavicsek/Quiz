@@ -132,6 +132,8 @@ body {
       main {
         color: whitesmoke;
         position: relative;
+        margin: 0 auto;
+        max-width: 750px;
         .background-container {
           opacity: 0.5;
           top: 0;
@@ -163,16 +165,13 @@ body {
             margin: 0 auto;
             text-align: center;
             font-family: $question-font;
-            font-size: 20px;
+            font-size: 1.2rem;
           }
         }
         .answers-container {
-          // display: flex;
-          // flex-wrap: wrap;
-          // justify-content: space-around;
           position: relative;
           width: 100%;
-          height: 45vh;
+          height: 40vh;
           min-height: 200px;
           .answer-group-container {
             position: relative;
@@ -185,31 +184,27 @@ body {
             .answer-box {
               margin: 5px;
               width: 100%;
-              // height: auto;
-              transition: 0.25s;
-              &:hover {
-                // width: 60%;
-              }
               .answer-label {
                 display: block;
                 position: relative;
                 height: 100%;
                 width: 100%;
-                background-color: rgba(0,0,0,0.1);
+                background-color: #FA8072;
+                border: 1px solid whitesmoke;
                 border-radius: 4px;
-                transition: 0.25s;
+                transition: 0.25s border-color, 0.25s background-color;
                 box-sizing: border-box;
                 overflow: hidden;
                 &:hover {
                   cursor: pointer;
-                  background-color: rgba(0,0,0,0.2);
-                  border: 2px solid whitesmoke;
+                  background-color: #F56E5C;
                 }
                 .label-text {
-                  width: 100%;
+                  width: 85%;
                   display: inline-block;
                   text-align: center;
                   font-family: $question-font;
+                  font-size: 1.1rem;
                 }
               }
               .answer-input {
@@ -370,7 +365,7 @@ body {
   box-shadow: 0 1px 30px rgba(0,0,0,0.5);
   height: 60px;
   width: 100%;
-  .header-background-strap {
+  .header-strap {
     background-color: Salmon;
     margin-top: -3px;
     .navbar {
@@ -427,7 +422,7 @@ body {
   }
 }
 
-button {
+.button {
   display: block;
   margin: 0px auto;
   margin-top: 20px;

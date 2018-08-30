@@ -1,9 +1,13 @@
 import * as UI from "./UI.js"
 
 const QuizLogic = (() => {
+
+  let newGame;
+
   class Game {
     constructor(questions) {
       this.questions = questions;
+      this.length = this.questions.length;
       this.currQuestionIndex = 0;
       this.currQuestion = this.questions[this.currQuestionIndex];
       this.score = 0;
@@ -12,45 +16,44 @@ const QuizLogic = (() => {
   }
 
   async function fetchQuestions(quantity, category, difficulty) {
-    const $loader = document.querySelector('.header-background-strap')
     let json;
     try {
-      $loader.style.marginTop = "0"
+      UI.$loader.style.marginTop = "0"
       const resp = await fetch(`https://opentdb.com/api.php?amount=${quantity}${category === null ? "" : "&category=" + category}&difficulty=${difficulty}`);
       json = resp.json();
     } catch (e) {
       console.log(e);
     } finally {
-      $loader.style.marginTop = "-3px"
+      UI.$loader.style.marginTop = "-3px"
     }
     return json;
   }
 
-  const initNewGame = (state) => {
-    const quantity = state.quantity;
-    const category = state.category;
-    const difficulty = state.difficulty;
+  const initNewGame = (settings) => {
+    const quantity = settings.quantity;
+    const category = settings.category;
+    const difficulty = settings.difficulty;
     fetchQuestions(quantity, category, difficulty)
       .then(res => {
-        const newGame = new Game(res.results);
+        newGame = new Game(res.results);
         console.log(newGame);
         loadNewQuestion(newGame.currQuestion)
       })
       .catch(err => console.log(err))
   }
 
-  const loadNewQuestion = newQuestion => {
-    const question = newQuestion.question;
-    let answers = [...newQuestion.incorrect_answers];
+  const loadNewQuestion = currQuestion => {
+    const question = currQuestion.question;
+    let answers = [...currQuestion.incorrect_answers];
     if (answers.length === 1) {
       answers = ["true", "false"]
     } else {
-      answers.splice(Math.floor(Math.random() * 4), 0, newQuestion.correct_answer);
+      answers.splice(Math.floor(Math.random() * 4), 0, currQuestion.correct_answer);
     }
-    if (newQuestion.type === "multiple") {
-      UI.renderQuestion(UI.answers_markup_multiple, question, answers)
+    if (currQuestion.type === "multiple") {
+      UI.renderQuestion(UI.multipleAnswers, question, answers, newGame)
     } else {
-      UI.renderQuestion(UI.answers_markup_bool, question, answers)
+      UI.renderQuestion(UI.boolAnswers, question, answers, newGame)
     }
   }
 

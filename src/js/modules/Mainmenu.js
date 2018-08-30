@@ -4,17 +4,16 @@ const MainMenu = (() => {
   let preloadedCategories;
 
   async function getCategories() {
-    const $loader = document.querySelector('.header-background-strap')
     let json;
     try {
-      $loader.style.transition = "margin-top 0.3s"
-      $loader.style.marginTop = "0"
+      UI.$loader.style.transition = "margin-top 0.3s"
+      UI.$loader.style.marginTop = "0"
       const resp = await fetch("https://opentdb.com/api_category.php");
       json = resp.json()
     } catch (e) {
       console.log(e);
     } finally {
-      $loader.style.marginTop = "-3px"
+      UI.$loader.style.marginTop = "-3px"
     }
     return json
   }

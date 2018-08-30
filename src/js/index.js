@@ -1,11 +1,9 @@
 import MainMenu from "./modules/Mainmenu.js"
-import Settings from "./modules/Settings.js"
-import NewGame from "./modules/NewGame.js"
+import GeneralSettings from "./modules/GeneralSettings.js"
+import GameSettings from "./modules/GameSettings.js"
 import QuizLogic from "./modules/QuizLogic.js"
 
-Settings.init();
-// Settings.eventListeners();
+GeneralSettings.init();
 MainMenu.init();
-NewGame.init();
+GameSettings.init();
 QuizLogic.init();
-// MainMenu.eventListeners();

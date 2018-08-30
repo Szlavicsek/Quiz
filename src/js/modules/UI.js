@@ -2,73 +2,25 @@ const $documentBody = document.querySelector('body');
 const $errorContainer = document.querySelector('.error-container');
 const $errorMessage = document.querySelector('.error-message');
 const $newGameButton = document.querySelector('.button-new-game');
+const $contentWrapper = document.querySelector('.content-wrapper')
 
-const container = `
-  <div class="container">
-    <div class="error-container">
-      <p class="error-message"></p>
-    </div>
-    <header class="header">
-      <div class="header-background-strap">
-        <div class="loading-bar-container">
-          <div class="loading-bar"></div>
-        </div>
-        <nav class="navbar">
-          <div class="logo-container">
-            <p class="logo">Quizzit</p>
-          </div>
-          <img class="avatar-image" src="src/assets/user-avatar-default.jpg" alt="">
-        </nav>
-      </div>
-    </header>
-    <div class="menu-wrapper">
-      <div class="menu-content">
-        <div class="big-background-logo-container">
-          <h1 class="title">Quizzit</h1>
-          <img class="circles" src="src/assets/header-circles-res.png" alt="">
-          <img src="src/assets/1x/ribbon-yellow.png" class="ribbon">
-        </div>
-        <main class="button-group">
-          <button class="button-new-game">New Game</button>
-          <button class="button-about">About</button>
-          <button class="button-settings">Settings</button>
-        </main>
-      </div>
-      <footer class="footer">
-        <p>Doncimacko 2018 &copy;</p>
-      </footer>
-    </div>
-  </div>
-`
+export const $loader = document.querySelector('.header-strap')
 
-const header_markup = `
-  <header class="header">
-    <div class="header-background-strap">
-      <div class="loading-bar-container">
-        <div class="loading-bar"></div>
-      </div>
-      <nav class="navbar">
-        <div class="logo-container">
-          <p class="logo">Quizzit</p>
-        </div>
-        <img class="avatar-image" src="src/assets/user-avatar-default.jpg" alt="">
-      </nav>
-    </div>
-  </header>
-`
+// Components to be parsed into other markup later on
 
 export const buttonGroup_mainMenu = `
-  <button class="button-new-game">New Game</button>
-  <button class="button-about">About</button>
-  <button class="button-settings">Settings</button>
+  <button class="button button-new-game">New Game</button>
+  <button class="button button-about">About</button>
+  <button class="button button-settings">Settings</button>
 `
 
 export const buttonGroup_generalSettings = `
-  <button class="button-theme">Theme: Coral</button>
-  <button class="button-sound">Sound: </button>
-  <button class="button-back button-back--settings">Back</button>
+  <button class="button button-theme">Theme: Coral</button>
+  <button class="button button-sound">Sound: </button>
+  <button class="button button-back button-back--settings">Back</button>
 `
-export const answers_markup_multiple = answers => {
+
+export const multipleAnswers = answers => {
   return `
     <div class="answers-container multiple">
       <div class="answer-group-container">
@@ -95,7 +47,7 @@ export const answers_markup_multiple = answers => {
   `
 }
 
-export const answers_markup_bool = answers => {
+export const boolAnswers = answers => {
   return `
     <div class="answers-container truefalse">
       <div class="answer-group-container">
@@ -112,13 +64,9 @@ export const answers_markup_bool = answers => {
   `
 }
 
-export const renderMenuDisplay = (buttongroup) => {
-  $documentBody.innerHTML = `
+export const renderMenuDisplay = buttongroup => {
+  $contentWrapper.innerHTML = `
   <div class="menu-wrapper">
-    <div class="error-container">
-      <p class="error-message"></p>
-    </div>
-    ${header_markup}
     <div class="menu-content">
       <div class="big-background-logo-container">
         <h1 class="title">Quizzit</h1>
@@ -137,12 +85,8 @@ export const renderMenuDisplay = (buttongroup) => {
 };
 
 export const renderNewGameSettings = preloaded => {
-  $documentBody.innerHTML = `
+  $contentWrapper.innerHTML = `
   <div class="menu-wrapper">
-    <div class="error-container">
-      <p class="error-message"></p>
-    </div>
-    ${header_markup}
     <div class="overlay options-overlay--difficulty">
       <div class="option-container fully-centered vertical">
         <div class="option-item" data-difficulty="1">Easy</div>
@@ -172,11 +116,11 @@ export const renderNewGameSettings = preloaded => {
         <img src="src/assets/1x/ribbon-yellow.png" class="ribbon">
       </div>
       <main class="button-group">
-        <button class="button-difficulty">Medium</button>
-        <button class="button-category">All Categories</button>
-        <button class="button-quantity">10 Questions</button>
-        <button class="button-play">Play</button>
-        <button class="button-back button-back--newGame">Back</button>
+        <button class="button button-difficulty">Medium</button>
+        <button class="button button-category">All Categories</button>
+        <button class="button button-quantity">10 Questions</button>
+        <button class="button button-play">Play</button>
+        <button class="button button-back button-back--newGame">Back</button>
       </main>
     </div>
     <footer class="footer">
@@ -186,10 +130,9 @@ export const renderNewGameSettings = preloaded => {
   `
 }
 
-export const renderQuestion = (answers_markup, question, answers) => {
-  $documentBody.innerHTML = `
+export const renderQuestion = (answers_markup, question, answers, game) => {
+  $contentWrapper.innerHTML = `
   <div class="new-game-wrapper">
-    ${header_markup}
     <div class="game-content">
       <main>
         <div class="background-container">
@@ -201,9 +144,9 @@ export const renderQuestion = (answers_markup, question, answers) => {
         </div>
         ${answers_markup(answers)}
         <div class="question-tracker-container">
-          <p>1/${answers.length}</p>
+          <p>${game.currQuestionIndex+1}/${game.length}</p>
         </div>
-        <button class="button-quit-game">Quit game</button>
+        <button class="button button-quit-game">Quit game</button>
       </main>
     </div>
     <footer class="footer">
@@ -214,9 +157,8 @@ export const renderQuestion = (answers_markup, question, answers) => {
 };
 
 export const renderGameEndScreen = () => {
-  $documentBody.innerHTML = `
+  $contentWrapper.innerHTML = `
   <div class="game-end-wrapper">
-    ${header_markup}
     <div class="game-end-content">
       <img class="circles" src="src/assets/header-circles-res.png" alt="">
       <nav>

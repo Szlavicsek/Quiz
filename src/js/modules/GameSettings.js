@@ -2,15 +2,15 @@ import QuizLogic from "./QuizLogic.js"
 import MainMenu from "./Mainmenu.js"
 import * as UI from "./UI.js"
 
-const NewGame = (() => {
+const GameSettings = (() => {
 
-  const state = {
+  const settings = {
     difficulty: "medium",
     quantity: 10,
     category: null,
     overlayIsOpen: false,
     desiredQuantity: 10,
-    maxAvaliable: undefined
+    maxAvailable: 50
   }
 
   const closeOverlay = (overlay) => {
@@ -33,9 +33,9 @@ const NewGame = (() => {
         difficulty = "hard"
         break;
     }
-    state.difficulty = difficulty;
-    if (state.category !== null) {
-      checkAvailableQuantity(state.category)
+    settings.difficulty = difficulty;
+    if (settings.category !== null) {
+      checkAvailableQuantity(settings.category)
         .then(res => {
           adjustQuantity(res);
         })
@@ -46,18 +46,18 @@ const NewGame = (() => {
   }
 
   const setCategory = (e) => {
-    state.category = e.target.getAttribute("data-id")
+    settings.category = e.target.getAttribute("data-id")
     document.querySelector('.button-category').innerText = e.target.innerText;
-    if (state.category !== "0") {
-      checkAvailableQuantity(state.category, e)
+    if (settings.category !== "0") {
+      checkAvailableQuantity(settings.category, e)
         .then(res => {
           adjustQuantity(res);
           closeOverlay(e.target.parentElement.parentElement);
         })
         .catch(err => console.log(err))
     } else {
-      state.availableQuantity = 50;
-      state.quantity = state.desiredQuantity;
+      settings.availableQuantity = 50;
+      settings.quantity = settings.desiredQuantity;
       refreshQuantityButtons();
       closeOverlay(e.target.parentElement.parentElement);
     }
@@ -65,9 +65,9 @@ const NewGame = (() => {
 
   const setQuantity = (e) => {
     if (!e.target.classList.contains("disabled")) {
-      state.quantity = e.target.innerText;
-      if (state.quantity >= 20) {
-        state.desiredQuantity = state.quantity
+      settings.quantity = e.target.innerText;
+      if (settings.quantity >= 20) {
+        settings.desiredQuantity = settings.quantity
       }
       refreshQuantityButtons();
       closeOverlay(e.target.parentElement.parentElement)
@@ -75,31 +75,30 @@ const NewGame = (() => {
   }
 
   const adjustQuantity = (res) => {
-    const difficulty = `total_${state.difficulty}_question_count`;
-    state.maxAvailable = res.category_question_count[difficulty];
-    if (state.maxAvailable < 10) {
-      state.quantity = state.maxAvailable
-    } else if (state.maxAvailable > state.desiredQuantity) {
-      state.quantity = state.desiredQuantity;
-    } else if (state.maxAvailable <= 50) {
-      state.quantity = Math.floor(state.maxAvailable / 10) * 10
+    const difficulty = `total_${settings.difficulty}_question_count`;
+    settings.maxAvailable = res.category_question_count[difficulty];
+    if (settings.maxAvailable < 10) {
+      settings.quantity = settings.maxAvailable
+    } else if (settings.maxAvailable > settings.desiredQuantity) {
+      settings.quantity = settings.desiredQuantity;
+    } else if (settings.maxAvailable <= 50) {
+      settings.quantity = Math.floor(settings.maxAvailable / 10) * 10
     } else {
-      state.quantity = 50;
+      settings.quantity = 50;
     }
     refreshQuantityButtons()
   }
 
   const refreshQuantityButtons = () => {
-
     // Refresh main "n Questions" button accordingly
-    document.querySelector('.button-quantity').innerText = `${state.quantity} Questions`;
+    document.querySelector('.button-quantity').innerText = `${settings.quantity} Questions`;
     const $quantityOptions = Array.from(document.querySelectorAll('.option-item[data-quantity]'));
 
     // Refresh possible quantity options accordingly on the overlay screen
-    if (state.quantity < 10) {
+    if (settings.quantity < 10) {
       $quantityOptions.forEach(option => {
         if (option.getAttribute("data-quantity") === "10") {
-          option.innerText = state.quantity;
+          option.innerText = settings.quantity;
         } else {
           option.className = "option-item disabled";
         }
@@ -108,7 +107,7 @@ const NewGame = (() => {
     } else {
       $quantityOptions.forEach(option => {
         option.innerText = option.getAttribute("data-quantity");
-        if (option.getAttribute("data-quantity") <= state.maxAvailable) {
+        if (option.getAttribute("data-quantity") <= settings.maxAvailable) {
           option.className = "option-item"
         } else {
           option.className = "option-item disabled"
@@ -120,21 +119,17 @@ const NewGame = (() => {
   async function checkAvailableQuantity(cat, e) {
     let response;
     try {
-      console.log("ljljljljl");
-      e.target.style.backgroundColor = "#92BA3F"
-      document.querySelector('.header-background-strap').style.marginTop = "0px"
+      // e.target.style.backgroundColor = "#92BA3F"
+      UI.$loader.style.marginTop = "0px"
       const res = await fetch(`https://opentdb.com/api_count.php?category=${cat}`);
       response = res.json()
     } catch (e) {
       console.log(e);
     } finally {
-      e.target.style.backgroundColor = "#F69085"
-      document.querySelector('.header-background-strap').style.marginTop = "-3px"
+      // e.target.style.backgroundColor = "#F69085"
+      UI.$loader.style.marginTop = "-3px"
     }
     return response
-    const resp = await fetch(`https://opentdb.com/api_count.php?category=${cat}`);
-    const json = resp.json();
-    return json
   }
 
   // Event functions
@@ -145,7 +140,7 @@ const NewGame = (() => {
     setTimeout(function() {
       $difficultyOverlay.style.opacity = "1";
     }, 1);
-    state.overlayIsOpen = true;
+    settings.overlayIsOpen = true;
   }
 
   const categoryClickEvent = () => {
@@ -154,7 +149,7 @@ const NewGame = (() => {
     setTimeout(function() {
       $categoriesOverlay.style.opacity = "1";
     }, 1);
-    state.overlayIsOpen = true;
+    settings.overlayIsOpen = true;
   }
 
   const quantityClickEvent = () => {
@@ -163,20 +158,20 @@ const NewGame = (() => {
     setTimeout(function() {
       $quantityOverlay.style.opacity = "1";
     }, 1);
-    state.overlayIsOpen = true;
+    settings.overlayIsOpen = true;
   }
 
   const playClickEvent = () => {
-    QuizLogic.initNewGame(state)
+    QuizLogic.initNewGame(settings)
   }
 
   const selectFromOverlay = (e) => {
     if (e.target.matches(".overlay")) {
       closeOverlay(e.target);
-      state.overlayIsOpen = false;
+      settings.overlayIsOpen = false;
     } else if (e.target.matches(".option-container")) {
       closeOverlay(e.target.parentElement);
-      state.overlayIsOpen = false;
+      settings.overlayIsOpen = false;
     } else if (e.target.matches(".option-item")) {
       if (e.target.parentElement.parentElement.matches(".options-overlay--difficulty")) {
         setDifficulty(e)
@@ -217,4 +212,4 @@ const NewGame = (() => {
   }
 })()
 
-export default NewGame
+export default GameSettings

@@ -138,6 +138,8 @@ body .new-game-wrapper .game-content {
 body .new-game-wrapper .game-content main {
   color: whitesmoke;
   position: relative;
+  margin: 0 auto;
+  max-width: 750px;
 }
 
 body .new-game-wrapper .game-content main .background-container {
@@ -175,13 +177,13 @@ body .new-game-wrapper .game-content main .question-container .question {
   margin: 0 auto;
   text-align: center;
   font-family: "Ubuntu", sans-serif;
-  font-size: 20px;
+  font-size: 1.2rem;
 }
 
 body .new-game-wrapper .game-content main .answers-container {
   position: relative;
   width: 100%;
-  height: 45vh;
+  height: 40vh;
   min-height: 200px;
 }
 
@@ -198,7 +200,6 @@ body .new-game-wrapper .game-content main .answers-container .answer-group-conta
 body .new-game-wrapper .game-content main .answers-container .answer-group-container .answer-box {
   margin: 5px;
   width: 100%;
-  transition: 0.25s;
 }
 
 body .new-game-wrapper .game-content main .answers-container .answer-group-container .answer-box .answer-label {
@@ -206,24 +207,25 @@ body .new-game-wrapper .game-content main .answers-container .answer-group-conta
   position: relative;
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.1);
+  background-color: #FA8072;
+  border: 1px solid whitesmoke;
   border-radius: 4px;
-  transition: 0.25s;
+  transition: 0.25s border-color, 0.25s background-color;
   box-sizing: border-box;
   overflow: hidden;
 }
 
 body .new-game-wrapper .game-content main .answers-container .answer-group-container .answer-box .answer-label:hover {
   cursor: pointer;
-  background-color: rgba(0, 0, 0, 0.2);
-  border: 2px solid whitesmoke;
+  background-color: #F56E5C;
 }
 
 body .new-game-wrapper .game-content main .answers-container .answer-group-container .answer-box .answer-label .label-text {
-  width: 100%;
+  width: 85%;
   display: inline-block;
   text-align: center;
   font-family: "Ubuntu", sans-serif;
+  font-size: 1.1rem;
 }
 
 body .new-game-wrapper .game-content main .answers-container .answer-group-container .answer-box .answer-input {
@@ -393,12 +395,12 @@ body .game-end-wrapper .game-end-content main .result-container .message {
   width: 100%;
 }
 
-.header .header-background-strap {
+.header .header-strap {
   background-color: Salmon;
   margin-top: -3px;
 }
 
-.header .header-background-strap .navbar {
+.header .header-strap .navbar {
   display: flex;
   justify-content: space-between;
   height: 65px;
@@ -408,23 +410,23 @@ body .game-end-wrapper .game-end-content main .result-container .message {
   align-items: center;
 }
 
-.header .header-background-strap .navbar .logo-container {
+.header .header-strap .navbar .logo-container {
   margin: 0;
   height: 100%;
   padding: 0 20px;
   transition: 0.15s;
 }
 
-.header .header-background-strap .navbar .logo-container:hover {
+.header .header-strap .navbar .logo-container:hover {
   background-color: rgba(0, 0, 0, 0.2);
   cursor: pointer;
 }
 
-.header .header-background-strap .navbar .logo-container:active {
+.header .header-strap .navbar .logo-container:active {
   background-color: rgba(0, 0, 0, 0.3);
 }
 
-.header .header-background-strap .navbar .logo-container .logo {
+.header .header-strap .navbar .logo-container .logo {
   font-family: "Pacifico", cursive;
   font-size: 30px;
   transform: translate(-8px, 4px) rotate(-15deg);
@@ -432,11 +434,11 @@ body .game-end-wrapper .game-end-content main .result-container .message {
   color: #FBF9FC;
 }
 
-.header .header-background-strap .navbar .logo-container .logo::selection {
+.header .header-strap .navbar .logo-container .logo::selection {
   background-color: transparent;
 }
 
-.header .header-background-strap .navbar .avatar-image {
+.header .header-strap .navbar .avatar-image {
   width: 50px;
   height: 50px;
   margin-right: 20px;
@@ -457,7 +459,7 @@ body .game-end-wrapper .game-end-content main .result-container .message {
   margin: 0;
 }
 
-button {
+.button {
   display: block;
   margin: 0px auto;
   margin-top: 20px;
@@ -475,16 +477,16 @@ button {
   transition: 0.15s, border-color 0.5s;
 }
 
-button:hover {
+.button:hover {
   cursor: pointer;
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-button:active {
+.button:active {
   background-color: #F69085;
 }
 
-button:last-of-type {
+.button:last-of-type {
   margin-bottom: 50px;
 }
 
