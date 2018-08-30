@@ -1,16 +1,21 @@
-import {
-  renderNewGame,
-  renderSettings
-} from "./UI.js"
+import * as UI from "./UI.js"
 
 const MainMenu = (() => {
-  const $errorContainer = document.querySelector('.error-container');
-  const $newGameButton = document.querySelector('.button-new-game');
   let preloadedCategories;
 
   async function getCategories() {
-    const res = await fetch("https://opentdb.com/api_category.php")
-    const json = res.json()
+    const $loader = document.querySelector('.header-background-strap')
+    let json;
+    try {
+      $loader.style.transition = "margin-top 0.3s"
+      $loader.style.marginTop = "0"
+      const resp = await fetch("https://opentdb.com/api_category.php");
+      json = resp.json()
+    } catch (e) {
+      console.log(e);
+    } finally {
+      $loader.style.marginTop = "-3px"
+    }
     return json
   }
 
@@ -27,32 +32,27 @@ const MainMenu = (() => {
           preloadedCategories = rendered
         })
       })
-      .catch(err => preloadedCategories = "error")
-  }
-
-  const showErrorMessage = () => {
-    $errorContainer.style.display = "block";
-    setTimeout(function() {
-      $errorContainer.style.transform = "translateY(0%)";
-      $newGameButton.style.borderColor = "#E94E38";
-    }, 15);
-    setTimeout(function() {
-      $errorContainer.style.transform = "translateY(-100%)"
-      $newGameButton.style.borderColor = "whitesmoke"
-    }, 2000);
-    preloadCategories()
+      .catch(err => {
+        if (err = "TypeError: Failed to fetch") {
+          const message = "Sorry, we couldn't reach the server. Please check your internet connection."
+          UI.showErrorMessage(message)
+        } else {
+          preloadedCategories = "error"
+        }
+      })
   }
 
   const eventListeners = () => {
     window.addEventListener("click", function(e) {
       if (e.target.matches(".button-new-game")) {
         if (preloadedCategories && preloadedCategories !== "error") {
-          renderNewGame(preloadedCategories);
+          UI.renderNewGameSettings(preloadedCategories);
         } else if (preloadedCategories === "error") {
-          showErrorMessage();
+          const message = "Sorry, it seems like the server is down. Please retr later."
+          UI.showErrorMessage(message, preloadCategories);
         }
       } else if (e.target.matches(".button-settings")) {
-        renderSettings()
+        UI.renderMenuDisplay(UI.buttonGroup_generalSettings);
       }
     });
   }
@@ -63,7 +63,7 @@ const MainMenu = (() => {
   }
 
   return {
-    init,
+    init
   }
 })()
 

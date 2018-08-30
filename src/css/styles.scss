@@ -7,19 +7,25 @@ $logo-font: 'Pacifico', cursive;
 $menu-components-font: 'Caveat', cursive;
 $question-font: 'Ubuntu', sans-serif;
 
+*{
+  -webkit-tap-highlight-color: transparent
+}
+
 body {
+  position: relative;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   background-color: $body-background;
   overflow-x: hidden;
+  width: 100vw;
 
   /******************* MAIN MENU STYLES *******************/
 
   .menu-wrapper {
     position: relative;
+    overflow-x: hidden;
     min-height: 100vh;
-    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -76,11 +82,11 @@ body {
     .menu-content {
       width: 100%;
       margin: 0px auto;
-      header {
+      .big-background-logo-container {
         .title {
           position: absolute;
           left: 50%;
-          top: -15px;
+          top: 50px;
           transform: translate(-50%) rotate(-15deg);
           font-family: $logo-font;
           font-size: 70px;
@@ -93,7 +99,7 @@ body {
         .circles {
           position: absolute;
           left: 50%;
-          top: -140px;
+          top: -70px;
           transform: translate(-50%);
           z-index: -3;
           width: 500px;
@@ -101,7 +107,7 @@ body {
         .ribbon {
           display: block;
           width: 300px;
-          margin: 140px auto 0 auto;
+          margin: 200px auto 0 auto;
         }
       }
       .button-group {
@@ -126,7 +132,8 @@ body {
       main {
         color: whitesmoke;
         position: relative;
-        .background-countdown {
+        .background-container {
+          opacity: 0.5;
           top: 0;
           left: 50%;
           transform: translate(-50%);
@@ -135,12 +142,22 @@ body {
           width: 400px;
           height: 400px;
           // background-color: rgba(0,0,0,0.1);
-          img {
-
+          .title {
+            position: absolute;
+            left: 50%;
+            top: 40px;
+            transform: translate(-50%) rotate(-15deg);
+            font-family: $logo-font;
+            font-size: 100px;
+            color: whitesmoke;
+            cursor: default;
+            &::selection {
+              background-color: transparent;
+            }
           }
         }
         .question-container {
-          margin: 20px 0;
+          margin: 100px 0 20px 0;
           .question {
             width: 80%;
             margin: 0 auto;
@@ -155,7 +172,7 @@ body {
           // justify-content: space-around;
           position: relative;
           width: 100%;
-          height: 50vh;
+          height: 45vh;
           min-height: 200px;
           .answer-group-container {
             position: relative;
@@ -291,43 +308,6 @@ body {
 
 /****************** COMPONENTS TO BE REUSED ******************/
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  height: 60px;
-  align-items: center;
-  .logo-container {
-    margin: 0;
-    height: 100%;
-    padding: 0 20px 0 10px;
-    transition: 0.15s;
-    &:hover {
-      background-color: rgba(0,0,0,0.2);
-      cursor: pointer;
-    }
-    &:active {
-      background-color: rgba(0,0,0,0.3);
-    }
-    .logo {
-      font-family: $logo-font;
-      font-size: 30px;
-      transform: rotate(-15deg);
-      margin: 0;
-      color: #FBF9FC;
-      &::selection {
-        background-color: transparent;
-      }
-    }
-  }
-  .avatar-image {
-    width: 50px;
-    height: 50px;
-    margin-right: 20px;
-    border-radius: 100%;
-    cursor: pointer;
-  }
-}
-
 .error-container {
   position: absolute;
   transform: translateY(-100%);
@@ -345,13 +325,94 @@ nav {
   }
 }
 
+/********** loading bar component styles **********/
+.loading-bar-container {
+  position: relative;
+  .loading-bar {
+    height: 3px;
+    background-color: powderblue;
+  }
+  .loading-bar:before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: steelblue;
+    animation: loading-bar 1.5s cubic-bezier(.5,.01,.51,1) infinite;
+  }
+}
+
+@keyframes loading-bar {
+  0%  {
+    transform: translateX(-102%);
+  }
+  45% {
+    transform: translateX(0);
+  }
+  55% {
+    transform: translateX(0);
+  }
+  90% {
+    transform: translateX(102%);
+  }
+  100% {
+    transform: translateX(102%);
+  }
+}
+
+/********** header component styles **********/
 .header {
   position: absolute;
-  z-index: -1;
-  background-color: Salmon;
+  z-index: 1;
   box-shadow: 0 1px 30px rgba(0,0,0,0.5);
   height: 60px;
   width: 100%;
+  .header-background-strap {
+    background-color: Salmon;
+    margin-top: -3px;
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      height: 65px;
+      width: 100%;
+      max-width: 750px;
+      margin: 0 auto;
+      align-items: center;
+      .logo-container {
+        margin: 0;
+        height: 100%;
+        padding: 0 20px;
+        transition: 0.15s;
+        &:hover {
+          background-color: rgba(0,0,0,0.2);
+          cursor: pointer;
+        }
+        &:active {
+          background-color: rgba(0,0,0,0.3);
+        }
+        .logo {
+          font-family: $logo-font;
+          font-size: 30px;
+          transform: translate(-8px, 4px) rotate(-15deg);
+          margin: 0;
+          color: #FBF9FC;
+          &::selection {
+            background-color: transparent;
+          }
+        }
+      }
+      .avatar-image {
+        width: 50px;
+        height: 50px;
+        margin-right: 20px;
+        border-radius: 100%;
+        cursor: pointer;
+      }
+    }
+  }
 }
 
 .footer {
@@ -370,7 +431,9 @@ button {
   display: block;
   margin: 0px auto;
   margin-top: 20px;
+  padding: 0 20px;
   width: 200px;
+  min-width: 200px;
   min-height: 40px;
   font-size: 25px;
   font-family: $menu-components-font;
@@ -436,8 +499,11 @@ button {
     // height: 120px !important;
   }
   .option-container {
-    margin: 0 auto;
+    margin: 0 auto !important;
     max-width: 80% !important;
+  }
+  button {
+    width: 200px !important;
   }
 }
 
