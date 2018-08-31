@@ -6,16 +6,16 @@ const MainMenu = (() => {
   async function getCategories() {
     let json;
     try {
-      UI.$loader.style.transition = "margin-top 0.3s"
-      UI.$loader.style.marginTop = "0"
+      UI.$loader.style.transition = "margin-top 0.3s";
+      UI.$loader.style.marginTop = "0";
       const resp = await fetch("https://opentdb.com/api_category.php");
-      json = resp.json()
+      json = resp.json();
     } catch (e) {
-      console.log(e);
+      return e;
     } finally {
-      UI.$loader.style.marginTop = "-3px"
+      UI.$loader.style.marginTop = "-3px";
     }
-    return json
+    return json;
   }
 
   // Preload and pre-render every category for future "New Game" overlay
@@ -27,16 +27,16 @@ const MainMenu = (() => {
         response.forEach(category => {
           rendered += `
             <div class="option-item" data-id="${category.id}">${category.name.replace(/^(Entertainment:\s|Science:\s)/, "")}</div>
-          `
-          preloadedCategories = rendered
+          `;
+          preloadedCategories = rendered;
         })
       })
       .catch(err => {
-        if (err = "TypeError: Failed to fetch") {
-          const message = "Sorry, we couldn't reach the server. Please check your internet connection."
-          UI.showErrorMessage(message)
+        if (err.type = "TypeError") {
+          const message = "Sorry, we couldn't reach reach the server. Please retry later."
+          UI.showErrorMessage(message);
         } else {
-          preloadedCategories = "error"
+          preloadedCategories = "error";
         }
       })
   }
@@ -52,9 +52,9 @@ const MainMenu = (() => {
         }
       } else if (e.target.matches(".button-settings")) {
         UI.renderMenuDisplay(UI.buttonGroup_generalSettings);
-      }
+      };
     });
-  }
+  };
 
   const init = () => {
     preloadCategories();

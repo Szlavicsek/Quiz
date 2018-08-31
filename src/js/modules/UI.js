@@ -6,6 +6,16 @@ const $contentWrapper = document.querySelector('.content-wrapper')
 
 export const $loader = document.querySelector('.header-strap')
 
+const animateButtons = () => {
+  const $buttons = Array.from(document.querySelectorAll('.button'))
+  $buttons.forEach(button => button.style.opacity = "0")
+  $buttons.forEach((button, i, arr) => {
+    setTimeout(function() {
+      button.style.opacity = "1"
+    }, i * 50)
+  })
+}
+
 // Components to be parsed into other markup later on
 
 export const buttonGroup_mainMenu = `
@@ -82,6 +92,7 @@ export const renderMenuDisplay = buttongroup => {
     </footer>
   </div>
   `
+  animateButtons()
 };
 
 export const renderNewGameSettings = preloaded => {
@@ -128,6 +139,7 @@ export const renderNewGameSettings = preloaded => {
     </footer>
   </div>
   `
+  animateButtons()
 }
 
 export const renderQuestion = (answers_markup, question, answers, game) => {
@@ -224,10 +236,8 @@ export const showErrorMessage = (msg, retryCb) => {
   $errorContainer.style.display = "block";
   setTimeout(function() {
     $errorContainer.style.transform = "translateY(0%)";
-    $newGameButton.style.borderColor = "#E94E38";
   }, 15);
   setTimeout(function() {
     $errorContainer.style.transform = "translateY(-100%)"
-    $newGameButton.style.borderColor = "whitesmoke"
   }, 4000);
 }

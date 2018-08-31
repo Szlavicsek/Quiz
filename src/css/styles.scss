@@ -52,6 +52,7 @@ body {
           width: 0 !important
         }
         .option-item {
+          box-sizing: border-box;
           color: whitesmoke;
           background-color: $button-background;
           border: 1px solid whitesmoke;
@@ -437,7 +438,7 @@ body {
   outline: none;
   border: 1px solid whitesmoke;
   border-radius: 20px;
-  transition: 0.15s, border-color 0.5s;
+  transition: 0.15s, border-color 0.5s, opacity 0.5s;
   &:hover {
     cursor: pointer;
     background-color: rgba(0,0,0,0.2)

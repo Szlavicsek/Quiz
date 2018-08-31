@@ -53,6 +53,7 @@ body .menu-wrapper .overlay .option-container::-webkit-scrollbar {
 }
 
 body .menu-wrapper .overlay .option-container .option-item {
+  box-sizing: border-box;
   color: whitesmoke;
   background-color: #F69085;
   border: 1px solid whitesmoke;
@@ -474,7 +475,7 @@ body .game-end-wrapper .game-end-content main .result-container .message {
   outline: none;
   border: 1px solid whitesmoke;
   border-radius: 20px;
-  transition: 0.15s, border-color 0.5s;
+  transition: 0.15s, border-color 0.5s, opacity 0.5s;
 }
 
 .button:hover {

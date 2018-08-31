@@ -13,14 +13,14 @@ const GameSettings = (() => {
     maxAvailable: 50
   }
 
-  const closeOverlay = (overlay) => {
+  const closeOverlay = overlay => {
     overlay.style.opacity = "0";
     setTimeout(function() {
       overlay.style.display = "none";
     }, 300);
   }
 
-  const setDifficulty = (e) => {
+  const setDifficulty = e => {
     let difficulty;
     switch (e.target.getAttribute("data-difficulty")) {
       case "1":
@@ -35,7 +35,7 @@ const GameSettings = (() => {
     }
     settings.difficulty = difficulty;
     if (settings.category !== null) {
-      checkAvailableQuantity(settings.category)
+      checkAvailableQuantity(settings.category, e)
         .then(res => {
           adjustQuantity(res);
         })
@@ -45,7 +45,7 @@ const GameSettings = (() => {
     closeOverlay(e.target.parentElement.parentElement)
   }
 
-  const setCategory = (e) => {
+  const setCategory = e => {
     settings.category = e.target.getAttribute("data-id")
     document.querySelector('.button-category').innerText = e.target.innerText;
     if (settings.category !== "0") {
@@ -56,14 +56,14 @@ const GameSettings = (() => {
         })
         .catch(err => console.log(err))
     } else {
-      settings.availableQuantity = 50;
+      settings.maxAvailable = 50;
       settings.quantity = settings.desiredQuantity;
       refreshQuantityButtons();
       closeOverlay(e.target.parentElement.parentElement);
     }
   }
 
-  const setQuantity = (e) => {
+  const setQuantity = e => {
     if (!e.target.classList.contains("disabled")) {
       settings.quantity = e.target.innerText;
       if (settings.quantity >= 20) {
@@ -74,9 +74,10 @@ const GameSettings = (() => {
     }
   }
 
-  const adjustQuantity = (res) => {
+  const adjustQuantity = res => {
     const difficulty = `total_${settings.difficulty}_question_count`;
     settings.maxAvailable = res.category_question_count[difficulty];
+    console.log(`adjusting quantity in category ${settings.category}. From ${settings.quantity}`);
     if (settings.maxAvailable < 10) {
       settings.quantity = settings.maxAvailable
     } else if (settings.maxAvailable > settings.desiredQuantity) {
@@ -102,8 +103,7 @@ const GameSettings = (() => {
         } else {
           option.className = "option-item disabled";
         }
-      });
-
+      })
     } else {
       $quantityOptions.forEach(option => {
         option.innerText = option.getAttribute("data-quantity");
@@ -112,21 +112,21 @@ const GameSettings = (() => {
         } else {
           option.className = "option-item disabled"
         }
-      });
+      })
     }
   }
 
   async function checkAvailableQuantity(cat, e) {
     let response;
     try {
-      // e.target.style.backgroundColor = "#92BA3F"
+      e.target.style.transform = "scale(1.2)"
       UI.$loader.style.marginTop = "0px"
       const res = await fetch(`https://opentdb.com/api_count.php?category=${cat}`);
       response = res.json()
     } catch (e) {
       console.log(e);
     } finally {
-      // e.target.style.backgroundColor = "#F69085"
+      e.target.style.transform = "scale(1)"
       UI.$loader.style.marginTop = "-3px"
     }
     return response
@@ -165,7 +165,7 @@ const GameSettings = (() => {
     QuizLogic.initNewGame(settings)
   }
 
-  const selectFromOverlay = (e) => {
+  const selectFromOverlay = e => {
     if (e.target.matches(".overlay")) {
       closeOverlay(e.target);
       settings.overlayIsOpen = false;
