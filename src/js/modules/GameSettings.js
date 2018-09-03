@@ -1,5 +1,5 @@
 import QuizLogic from "./QuizLogic.js"
-import MainMenu from "./Mainmenu.js"
+import MainMenu from "./MainMenu.js"
 import * as UI from "./UI.js"
 
 const GameSettings = (() => {
@@ -11,6 +11,15 @@ const GameSettings = (() => {
     overlayIsOpen: false,
     desiredQuantity: 10,
     maxAvailable: 50
+  }
+
+  const restoreSettings = () => {
+    settings.difficulty = "medium";
+    settings.quantity = 10;
+    settings.category = null;
+    settings.overlayIsOpen = false;
+    settings.desiredQuantity = 10;
+    settings.maxAvailable = 50;
   }
 
   const closeOverlay = overlay => {
@@ -77,7 +86,6 @@ const GameSettings = (() => {
   const adjustQuantity = res => {
     const difficulty = `total_${settings.difficulty}_question_count`;
     settings.maxAvailable = res.category_question_count[difficulty];
-    console.log(`adjusting quantity in category ${settings.category}. From ${settings.quantity}`);
     if (settings.maxAvailable < 10) {
       settings.quantity = settings.maxAvailable
     } else if (settings.maxAvailable > settings.desiredQuantity) {
@@ -116,7 +124,7 @@ const GameSettings = (() => {
     }
   }
 
-  async function checkAvailableQuantity(cat, e) {
+  const checkAvailableQuantity = async (cat, e) => {
     let response;
     try {
       e.target.style.transform = "scale(1.2)"
@@ -162,11 +170,12 @@ const GameSettings = (() => {
   }
 
   const playClickEvent = () => {
-    QuizLogic.initNewGame(settings)
+    QuizLogic.initNewGame(settings);
+    restoreSettings();
   }
 
   const selectFromOverlay = e => {
-    if (e.target.matches(".overlay")) {
+    if (e.target.matches(".overlay") && !e.target.matches(".overlay--game-end")) {
       closeOverlay(e.target);
       settings.overlayIsOpen = false;
     } else if (e.target.matches(".option-container")) {
@@ -195,7 +204,8 @@ const GameSettings = (() => {
         quantityClickEvent();
       } else if (e.target.matches(".button-play")) {
         playClickEvent();
-      } else if (e.target.matches(".button-back--newGame")) {
+      } else if (e.target.matches(".button-main-menu")) {
+        //this listener is responsible for all the buttons which take the user back to the main menu
         UI.renderMenuDisplay(UI.buttonGroup_mainMenu);
       } else {
         selectFromOverlay(e);
@@ -208,7 +218,8 @@ const GameSettings = (() => {
   }
 
   return {
-    init
+    init,
+    settings
   }
 })()
 
