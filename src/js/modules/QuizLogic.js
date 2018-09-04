@@ -134,7 +134,11 @@ const QuizLogic = (() => {
   }
 
   const quitGame = () => {
-
+    const $overlay = document.querySelector('.overlay--in-game')
+    $overlay.style.display = "block";
+    setTimeout(function() {
+      $overlay.style.opacity = "1";
+    }, 15)
   }
 
   const eventListeners = () => {

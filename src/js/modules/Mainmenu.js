@@ -33,7 +33,7 @@ const MainMenu = (() => {
       })
       .catch(err => {
         if (err.type = "TypeError") {
-          const message = "Sorry, we couldn't reach reach the server. Please retry later."
+          const message = "Sorry, we couldn't reach the server. Please retry later."
           UI.showErrorMessage(message);
         } else {
           preloadedCategories = "error";

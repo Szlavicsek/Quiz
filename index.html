@@ -10,45 +10,6 @@
 </head>
 
 <body>
-  <div class="container">
-    <div class="error-container">
-      <p class="error-message"></p>
-    </div>
-    <header class="header">
-      <div class="header-strap">
-        <div class="loading-bar-container">
-          <div class="loading-bar"></div>
-        </div>
-        <nav class="navbar">
-          <div class="logo-container">
-            <p class="logo">Quizzit</p>
-          </div>
-          <img class="avatar-image" src="src/assets/user-avatar-default.jpg" alt="">
-        </nav>
-      </div>
-    </header>
-    <div class="content-wrapper">
-      <div class="overlay-final"></div>
-      <div class="menu-wrapper">
-        <div class="menu-content">
-          <div class="big-background-logo-container">
-            <h1 class="title">Quizzit</h1>
-            <img class="circles" src="src/assets/header-circles-res.png" alt="">
-            <img class="ribbon" src="src/assets/1x/ribbon-yellow.png">
-          </div>
-          <main class="button-group">
-            <button class="button button-new-game">New Game</button>
-            <button class="button button-about">About</button>
-            <button class="button button-settings">Settings</button>
-          </main>
-        </div>
-        <footer class="footer">
-          <p>Doncimacko 2018 &copy;</p>
-        </footer>
-      </div>
-    </div>
-  </div>
-
   <!-- <div class="container">
     <div class="error-container">
       <p class="error-message"></p>
@@ -67,42 +28,86 @@
       </div>
     </header>
     <div class="content-wrapper">
-      <div class="new-game-wrapper">
-        <div class="game-content">
-          <div class="background-container">
-            <img class="fully-centered" src="src/assets/header-circles-res.png" alt="">
-            <h1 class="title">Quizzit</h1>
-          </div>
-          <div class="question-container">
-            <p class="question">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, quibusdam.</p>
-          </div>
-          <div class="answers-container multiple">
-            <div class="answer-group-container">
-              <div class="answer-box">
-                <p class="answer-text fully-centered">“Of all the gin joints, in all the towns, in all the world, she walks into mine…”</p>
-              </div>
-              <div class="answer-box">
-                <p class="answer-text fully-centered">“Of all the gin joints, in all the towns, in all the world, she walks into mine…”</p>
-              </div>
-            </div>
-            <div class="answer-group-container">
-              <div class="answer-box">
-                <p class="answer-text fully-centered">“Of all the gin joints, in all the towns, in all the world, she walks into mine…”</p>
-              </div>
-              <div class="answer-box">
-                <p class="answer-text fully-centered">“Of all the gin joints, in all the towns, in all the world, she walks into mine…”</p>
-              </div>
-            </div>
-          </div>
-          <p class="question-tracker">1/10</p>
-          <button class="button button-quit-game">Quit game</button>
+      <div class="overlay-final"></div>
+      <div class="menu-content">
+        <div class="big-background-logo-container">
+          <h1 class="title">Quizzit</h1>
+          <img class="circles" src="src/assets/header-circles-res.png" alt="">
+          <img class="ribbon" src="src/assets/1x/ribbon-yellow.png">
         </div>
-        <footer class="footer">
-          <p>Doncimacko 2018 &copy;</p>
-        </footer>
+        <main class="button-group">
+          <button class="button button-new-game">New Game</button>
+          <button class="button button-about">About</button>
+          <button class="button button-settings">Settings</button>
+        </main>
       </div>
+      <footer class="footer">
+        <p>Doncimacko 2018 &copy;</p>
+      </footer>
     </div>
   </div> -->
+
+  <div class="container">
+    <div class="error-container">
+      <p class="error-message"></p>
+    </div>
+    <header class="header">
+      <div class="header-strap">
+        <div class="loading-bar-container">
+          <div class="loading-bar"></div>
+        </div>
+        <nav class="navbar">
+          <div class="logo-container">
+            <p class="logo">Quizzit</p>
+          </div>
+          <img class="avatar-image" src="src/assets/user-avatar-default.jpg" alt="">
+        </nav>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <div class="overlay overlay--in-game">
+        <div class="quit-option-container fully-centered">
+          <p>Do you want to quit the game?</p>
+          <div class="button-box">
+            <button class="button-stay-here">No</button>
+            <button class="button-main-menu">Yes</button>
+          </div>
+        </div>
+      </div>
+      <div class="game-content">
+        <div class="background-container">
+          <img class="fully-centered" src="src/assets/header-circles-res.png" alt="">
+          <h1 class="title">Quizzit</h1>
+        </div>
+        <div class="question-container">
+          <p class="question">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, quibusdam.</p>
+        </div>
+        <div class="answers-container multiple">
+          <div class="answer-group-container">
+            <div class="answer-box">
+              <p class="answer-text">parentheses</p>
+            </div>
+            <div class="answer-box">
+              <p class="answer-text">“Of all</p>
+            </div>
+          </div>
+          <div class="answer-group-container">
+            <div class="answer-box">
+              <p class="answer-text">“Of all</p>
+            </div>
+            <div class="answer-box">
+              <p class="answer-text">“Of all the gin joints</p>
+            </div>
+          </div>
+        </div>
+        <p class="question-tracker">1/10</p>
+        <button class="button button-quit-game">Quit game</button>
+      </div>
+      <footer class="footer">
+        <p>Doncimacko 2018 &copy;</p>
+      </footer>
+    </div>
+  </div>
 
   <!-- <div class="container">
     <div class="error-container">

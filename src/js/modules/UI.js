@@ -88,86 +88,80 @@ export const boolAnswers = answers => {
 
 export const renderMenuDisplay = buttongroup => {
   $contentWrapper.innerHTML = `
-  <div class="menu-wrapper">
-    <div class="menu-content">
-      <div class="big-background-logo-container">
-        <h1 class="title">Quizzit</h1>
-        <img class="circles" src="src/assets/header-circles-res.png" alt="">
-        <img src="src/assets/1x/ribbon-yellow.png" class="ribbon">
-      </div>
-      <div class="button-group">
-        ${buttongroup}
-      </div>
+  <div class="menu-content">
+    <div class="big-background-logo-container">
+      <h1 class="title">Quizzit</h1>
+      <img class="circles" src="src/assets/header-circles-res.png" alt="">
+      <img src="src/assets/1x/ribbon-yellow.png" class="ribbon">
     </div>
-    ${footer}
+    <div class="button-group">
+      ${buttongroup}
+    </div>
   </div>
+  ${footer}
   `
   animateButtons()
 };
 
 export const renderNewGameSettings = preloaded => {
   $contentWrapper.innerHTML = `
-  <div class="menu-wrapper">
-    <div class="overlay options-overlay--difficulty">
-      <div class="option-container fully-centered vertical">
-        <div class="option-item" data-difficulty="1">Easy</div>
-        <div class="option-item" data-difficulty="2">Medium</div>
-        <div class="option-item" data-difficulty="3">Hard</div>
-      </div>
+  <div class="overlay options-overlay--difficulty">
+    <div class="option-container fully-centered vertical">
+      <div class="option-item" data-difficulty="1">Easy</div>
+      <div class="option-item" data-difficulty="2">Medium</div>
+      <div class="option-item" data-difficulty="3">Hard</div>
     </div>
-    <div class="overlay options-overlay--quantity">
-      <div class="option-container fully-centered vertical">
-        <div class="option-item" data-quantity="10">10</div>
-        <div class="option-item" data-quantity="20">20</div>
-        <div class="option-item" data-quantity="30">30</div>
-        <div class="option-item" data-quantity="40">40</div>
-        <div class="option-item" data-quantity="50">50</div>
-      </div>
-    </div>
-    <div class="overlay options-overlay--category">
-      <div class="option-container fully-centered">
-        <div class="option-item" data-id="0">All Categories</div>
-        ${preloaded}
-      </div>
-    </div>
-    <div class="menu-content">
-      <div class="big-background-logo-container">
-        <h1 class="title">Quizzit</h1>
-        <img class="circles" src="src/assets/header-circles-res.png" alt="">
-        <img src="src/assets/1x/ribbon-yellow.png" class="ribbon">
-      </div>
-      <div class="button-group">
-        <button class="button button-difficulty">Medium</button>
-        <button class="button button-category">All Categories</button>
-        <button class="button button-quantity">10 Questions</button>
-        <button class="button button-play">Play</button>
-        <button class="button button-main-menu">Back</button>
-      </div>
-    </div>
-    ${footer}
   </div>
+  <div class="overlay options-overlay--quantity">
+    <div class="option-container fully-centered vertical">
+      <div class="option-item" data-quantity="10">10</div>
+      <div class="option-item" data-quantity="20">20</div>
+      <div class="option-item" data-quantity="30">30</div>
+      <div class="option-item" data-quantity="40">40</div>
+      <div class="option-item" data-quantity="50">50</div>
+    </div>
+  </div>
+  <div class="overlay options-overlay--category">
+    <div class="option-container fully-centered">
+      <div class="option-item" data-id="0">All Categories</div>
+      ${preloaded}
+    </div>
+  </div>
+  <div class="menu-content">
+    <div class="big-background-logo-container">
+      <h1 class="title">Quizzit</h1>
+      <img class="circles" src="src/assets/header-circles-res.png" alt="">
+      <img src="src/assets/1x/ribbon-yellow.png" class="ribbon">
+    </div>
+    <div class="button-group">
+      <button class="button button-difficulty">Medium</button>
+      <button class="button button-category">All Categories</button>
+      <button class="button button-quantity">10 Questions</button>
+      <button class="button button-play">Play</button>
+      <button class="button button-main-menu">Back</button>
+    </div>
+  </div>
+  ${footer}
   `
   animateButtons()
 }
 
 export const renderQuestion = (answers_markup, question, answers, newGame) => {
   $contentWrapper.innerHTML = `
-  <div class="new-game-wrapper">
-    <div class="overlay overlay--game-end"></div>
-    <div class="game-content">
-      <div class="background-container">
-        <img class="fully-centered" src="src/assets/header-circles-res.png" alt="">
-        <h1 class="title">Quizzit</h1>
-      </div>
-      <div class="question-container">
-        <p class="question">${question}</p>
-      </div>
-      ${answers_markup(answers)}
-      <p class="question-tracker">${newGame.currQuestionIndex+1}/${newGame.quizLength}</p>
-      <button class="button button-quit-game">Quit game</button>
+  <div class="overlay overlay--game-end"></div>
+  <div class="game-content">
+    <div class="background-container">
+      <img class="fully-centered" src="src/assets/header-circles-res.png" alt="">
+      <h1 class="title">Quizzit</h1>
     </div>
-    ${footer}
+    <div class="question-container">
+      <p class="question">${question}</p>
+    </div>
+    ${answers_markup(answers)}
+    <p class="question-tracker">${newGame.currQuestionIndex+1}/${newGame.quizLength}</p>
+    <button class="button button-quit-game">Quit game</button>
   </div>
+  ${footer}
   `
 };
 

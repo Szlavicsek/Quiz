@@ -12,7 +12,7 @@ $question-font: 'Ubuntu', sans-serif;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
   ::selection {
-    background-color: transparent;
+    background-color: black;
   }
 }
 
@@ -24,6 +24,15 @@ body {
   background-color: $body-background;
   overflow-x: hidden;
   width: 100vw;
+}
+
+.content-wrapper {
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /****************** COMPONENTS TO BE REUSED ******************/
@@ -123,14 +132,7 @@ body {
 }
 
 /* MENU STYLES BEGIN (including settings menu) */
-.menu-wrapper {
-  position: relative;
-  overflow-x: hidden;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
+
 
 .menu-content {
   width: 100%;
@@ -235,13 +237,38 @@ body {
 
 /******************* GAMEPLAY SCREEN STYLES *******************/
 
-.new-game-wrapper {
-  min-height: 100vh;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  .overlay {
+.overlay--in-game {
+  display: block;
+  opacity: 1;
+}
+
+.quit-option-container {
+  color: white;
+  width: 90%;
+  p {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  .button-box {
+    display: flex;
+    justify-content: center;
+    button {
+      display: block;
+      width: 100px;
+      height: 50px;
+      margin: 10px;
+      border: 1px solid whitesmoke;
+      outline: 0;
+      border-radius: 5px;
+      cursor: pointer;
+      &:first-of-type {
+        background-color: #FF4321;
+      }
+      &:last-of-type {
+        background-color: lightgreen;
+      }
+    }
   }
 }
 
@@ -284,8 +311,6 @@ body {
 .answers-container {
   position: relative;
   width: 100%;
-  height: 45vh;
-  // min-height: 200px;
 }
 
 .answer-group-container {
@@ -295,14 +320,16 @@ body {
   flex-wrap: wrap;
   justify-content: space-between;
   width: 90%;
-  height: 50%;
+  min-height: 50%;
 }
 
 .answer-box {
   position: relative;
+  display: flex;
+  align-items: center;
   margin: 5px;
-  height: auto;
   width: 100%;
+  min-height: 8vh;
   background-color: #FA8072;
   border: 1px solid whitesmoke;
   border-radius: 4px;
@@ -314,6 +341,7 @@ body {
   }
   .answer-text {
     text-align: center;
+    margin: 0 auto;
   }
 }
 
@@ -329,20 +357,13 @@ body {
 }
 
 .question-tracker {
+  margin-top: 10px;
   text-align: center;
   font-family: $question-font;
   letter-spacing: 2px;
 }
 
 /******************* GAME-END SCREEN END *******************/
-
-.game-end-screen-wrapper {
-  min-height: 100vh;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
 
 .game-end-screen-content {
   width: 100%;
@@ -463,10 +484,6 @@ body {
 
 /* Larger than mobile */
 @media (min-width: 400px) {
-  #circles {
-    top: -200px !important;
-    width: 600px !important;
-  }
   .answer-group-container {
     flex-wrap: nowrap !important;
   }
@@ -474,49 +491,20 @@ body {
     margin: 0 auto;
     max-width: 90% !important;
   }
+  .answer-box {
+    min-height: 20vh;
+  }
 }
 
 /* Larger than phablet */
 @media (min-width: 520px) {
-  #circles {
-    top: -240px !important;
-    width: 700px !important;
-  }
-  .answer-group-container {
-    // width: 45% !important;
-  }
-  .game-content, .game-end-content, .menu-content {
-    width: 100% !important;
-  }
-  .answer-box {
-    // height: 120px !important;
-  }
-  .option-container {
-    margin: 0 auto !important;
-    max-width: 80% !important;
-  }
-  button {
-    width: 200px !important;
-  }
+
 }
 
 /* Larger than tablet */
 @media (min-width: 750px) {
-  #title {
-    font-size: 20px !important;
-  }
-  .game-content, .game-end-content, .menu-content {
-    // width: 95% !important;
-  }
 }
 
 /* Larger than desktop */
 @media (min-width: 960px) {
-    #circles {
-      top: -100px !important;
-      width: 700px !important;
-  }
-  .game-content, .game-end-content, .menu-content {
-    // width: 960px !important;
-  }
 }
