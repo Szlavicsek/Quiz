@@ -3,6 +3,7 @@
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
+  user-select: none;
 }
 
 * ::selection {
@@ -327,6 +328,7 @@ body {
   position: relative;
   display: flex;
   align-items: center;
+  justify-content: center;
   margin: 5px;
   width: 100%;
   min-height: 8vh;
@@ -340,11 +342,6 @@ body {
 .answer-box:hover {
   cursor: pointer;
   background-color: #F56E5C;
-}
-
-.answer-box .answer-text {
-  text-align: center;
-  margin: 0 auto;
 }
 
 .truefalse .answer-group-container {

@@ -5,12 +5,6 @@ import {
 
 const QuizLogic = (() => {
 
-  const decodeHTML = html => {
-    const text = document.createElement('textarea');
-    text.innerHTML = html;
-    return text.value;
-  };
-
   let newGame;
 
   class Game {
@@ -27,25 +21,38 @@ const QuizLogic = (() => {
     }
 
     gameHasEnded() {
-      return this.currQuestionIndex === this.quizLength
+      return this.currQuestionIndex === this.quizLength;
     }
 
-    isCorrect(guess) {
-      return guess === decodeHTML(this.getCurrQuestion().correct_answer)
+    isCorrect(guessedIndex) {
+      return this.getCurrQuestion().correct_answer_index === guessedIndex
     }
 
-    updateScore(guess) {
-      if (guess === decodeHTML(this.getCurrQuestion().correct_answer)) {
+    updateScore(isCorrect, guessedIndex, waitTime) {
+      const correctAnswerIndex = this.getCurrQuestion().correct_answer_index;
+      const $guessBox = Array.from(document.querySelectorAll('.answer-box'))[guessedIndex];
+      const $correctBox = Array.from(document.querySelectorAll('.answer-box'))[correctAnswerIndex];
+      if (isCorrect) {
         sounds.correct.play();
         this.totalGotRight++;
-        this.totalScore += this.scoring()
+        this.totalScore += this.scoring();
+        $guessBox.style.borderColor = "green";
       } else {
         sounds.wrong.play();
+        $guessBox.style.borderColor = "red";
+        $correctBox.style.borderColor = "green";
       }
+      $correctBox.classList.toggle("disable");
+      this.currQuestionIndex++;
+      setTimeout(function() {
+        $guessBox.style.borderColor = "whitesmoke"
+        $correctBox.style.borderColor = "whitesmoke"
+        $correctBox.classList.toggle("disable");
+      }, waitTime);
     }
 
     canClick() {
-      return Array.from(document.querySelectorAll('.answer-box')).every(x => !x.matches(".disable"))
+      return Array.from(document.querySelectorAll('.answer-box')).every(x => !x.matches(".disable"));
     }
 
     scoring() {
@@ -61,33 +68,18 @@ const QuizLogic = (() => {
           break;
       }
     }
-
-    changeBorderColor(guess, $guessBox, $correctAnswerBox, waitTime) {
-      if (this.isCorrect(guess)) {
-        $guessBox.style.borderColor = "green";
-      } else {
-        $guessBox.style.borderColor = "red";
-        $correctAnswerBox.style.borderColor = "green";
-      }
-      $correctAnswerBox.classList.toggle("disable")
-      setTimeout(function() {
-        $guessBox.style.borderColor = "whitesmoke"
-        $correctAnswerBox.style.borderColor = "whitesmoke"
-        $correctAnswerBox.classList.toggle("disable")
-      }, waitTime)
-    }
   }
 
   const fetchQuestions = async (quantity, category, difficulty) => {
     let json;
     try {
-      UI.$loader.style.marginTop = "0"
+      UI.$loader.style.marginTop = "0";
       const resp = await fetch(`https://opentdb.com/api.php?amount=${quantity}${category === null ? "" : "&category=" + category}&difficulty=${difficulty}`);
       json = resp.json();
     } catch (e) {
       return e
     } finally {
-      UI.$loader.style.marginTop = "-3px"
+      UI.$loader.style.marginTop = "-3px";
     }
     return json;
   }
@@ -98,77 +90,67 @@ const QuizLogic = (() => {
     const difficulty = settings.difficulty;
     fetchQuestions(quantity, category, difficulty)
       .then(res => {
-        newGame = new Game(res.results);
-        loadNewQuestion(newGame.getCurrQuestion())
+        const questions = [...res.results];
+        questions.map(q => {
+          const randomizedCorrectIndex = Math.floor(Math.random() * 4);
+          const incorrectAnswers = [...q.incorrect_answers]; // either consists of 1 or 3
+          if (incorrectAnswers.length === 1) {
+            q.mixed_answers = ["True", "False"];
+            q.correct_answer_index = q.mixed_answers.indexOf(q.correct_answer);
+          } else {
+            q.mixed_answers = [...incorrectAnswers];
+            q.mixed_answers.splice(randomizedCorrectIndex, 0, q.correct_answer);
+            q.correct_answer_index = randomizedCorrectIndex;
+          }
+        })
+        newGame = new Game(questions);
+        loadNewQuestion(newGame.getCurrQuestion());
       })
       .catch(err => console.log(err))
   }
 
   const loadNewQuestion = currQuestion => {
-    const question = currQuestion.question;
-    let answers = [...currQuestion.incorrect_answers];
-    if (answers.length === 1) {
-      answers = ["True", "False"]
-    } else {
-      answers.splice(Math.floor(Math.random() * 4), 0, currQuestion.correct_answer);
-    }
     if (currQuestion.type === "multiple") {
-      UI.renderQuestion(UI.multipleAnswers, question, answers, newGame)
+      UI.renderQuestion(UI.multipleAnswers, currQuestion.question, currQuestion.mixed_answers, newGame);
     } else {
-      UI.renderQuestion(UI.boolAnswers, question, answers, newGame)
+      UI.renderQuestion(UI.boolAnswers, currQuestion.question, currQuestion.mixed_answers, newGame);
     }
   }
 
-  const guessClickEvent = (guess, $guessBox, $correctAnswerBox) => {
+  const guessClickEvent = (guessedIndex) => {
     const waitTime = 1500;
-    newGame.updateScore(guess);
-    newGame.changeBorderColor(guess, $guessBox, $correctAnswerBox, waitTime);
-    newGame.currQuestionIndex++;
+    const isCorrect = newGame.isCorrect(guessedIndex);
+    newGame.updateScore(isCorrect, guessedIndex, waitTime);
     setTimeout(function() {
       if (!newGame.gameHasEnded()) {
         loadNewQuestion(newGame.getCurrQuestion());
       } else {
-        UI.renderGameEndScreen(newGame)
+        UI.renderGameEndScreen(newGame);
       }
-    }, waitTime)
+    }, waitTime);
   }
 
   const quitGame = () => {
-    const $overlay = document.querySelector('.overlay--in-game')
+    const $overlay = document.querySelector('.overlay--in-game');
     $overlay.style.display = "block";
     setTimeout(function() {
       $overlay.style.opacity = "1";
     }, 15)
   }
 
-  const eventListeners = () => {
+  const eventListeners = () => { // check
     window.addEventListener("click", function(e) {
-      if (e.target.matches(".guess") && newGame.canClick()) {
-        const $correctAnswerBox = Array.from(document.querySelectorAll('.answer-box')).find(box => {
-          // to deal with occasional whitespace
-          const regex = /\s$/
-          const boxText = box.firstElementChild.innerText
-          const correctAnswerText = decodeHTML(newGame.getCurrQuestion().correct_answer).replace(regex, "");
-          return boxText === correctAnswerText
-        })
-        let $guessBox,
-          guess;
-        if (e.target.matches(".answer-box")) {
-          $guessBox = e.target
-          guess = e.target.firstElementChild.innerText
-        } else {
-          $guessBox = e.target.parentElement
-          guess = e.target.innerText;
-        }
-        guessClickEvent(guess, $guessBox, $correctAnswerBox)
+      if (e.target.matches(".answer-box") && newGame.canClick()) {
+        const guessedIndex = Array.from(document.querySelectorAll('.answer-box')).indexOf(e.target);
+        guessClickEvent(guessedIndex);
       } else if (e.target.matches(".button-quit-game")) {
-        quitGame()
+        quitGame();
       }
     })
   }
 
   const init = () => {
-    eventListeners()
+    eventListeners();
   }
 
   return {

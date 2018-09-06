@@ -25,7 +25,7 @@ const renderScoreInfo = (newGame) => {
   return `
     <p class="result-info score">Score: ${newGame.totalGotRight}/${newGame.questions.length}</p>
     <p class="result-info points">+${newGame.totalScore} Points</p>
-    <p class="result-info message">Awesome!</p>
+    <p class="result-info message"></p>
   `
 }
 
@@ -52,19 +52,19 @@ export const multipleAnswers = answers => {
   return `
   <div class="answers-container multiple">
     <div class="answer-group-container">
-      <div class="guess answer-box">
-        <p class="guess answer-text fully-centered">${answers[0]}</p>
+      <div class="answer-box">
+        ${answers[0]}
       </div>
-      <div class="guess answer-box">
-        <p class="guess answer-text fully-centered">${answers[1]}</p>
+      <div class="answer-box">
+        ${answers[1]}
       </div>
     </div>
     <div class="answer-group-container">
-      <div class="guess answer-box">
-        <p class="guess answer-text fully-centered">${answers[2]}</p>
+      <div class="answer-box">
+        ${answers[2]}
       </div>
-      <div class="guess answer-box">
-        <p class="guess answer-text fully-centered">${answers[3]}</p>
+      <div class="answer-box">
+        ${answers[3]}
       </div>
     </div>
   </div>
@@ -75,11 +75,11 @@ export const boolAnswers = answers => {
   return `
   <div class="answers-container truefalse">
     <div class="answer-group-container">
-      <div class="guess answer-box">
-        <p class="guess answer-text fully-centered">${answers[0]}</p>
+      <div class="answer-box">
+        ${answers[0]}
       </div>
-      <div class="guess answer-box">
-        <p class="guess answer-text fully-centered">${answers[1]}</p>
+      <div class="answer-box">
+        ${answers[1]}
       </div>
     </div>
   </div>
