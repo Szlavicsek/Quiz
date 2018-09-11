@@ -5,12 +5,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="google-signin-client_id" content="417021403949-p6qgc6i3t45gurg8guntpnj8a3v4gvee.apps.googleusercontent.com">
   <link rel="stylesheet" href="src/css/styles.css">
   <title>Quizzit</title>
 </head>
 
 <body>
-  <!-- <div class="container">
+  <div class="container">
     <div class="error-container">
       <p class="error-message"></p>
     </div>
@@ -23,7 +24,8 @@
           <div class="logo-container">
             <p class="logo">Quizzit</p>
           </div>
-          <img class="avatar-image" src="src/assets/user-avatar-default.jpg" alt="">
+          <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+          <img class="g-signin2 avatar-image" data-onsuccess="onSignIn" src="src/assets/user-avatar-default.jpg" alt="">
         </nav>
       </div>
     </header>
@@ -44,9 +46,9 @@
         <p>Doncimacko 2018 &copy;</p>
       </footer>
     </div>
-  </div> -->
+  </div>
 
-  <div class="container">
+  <!-- <div class="container">
     <div class="error-container">
       <p class="error-message"></p>
     </div>
@@ -90,14 +92,6 @@
               no
             </div>
           </div>
-          <!-- <div class="answer-group-container">
-            <div class="answer-box">
-              parentheses Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi, voluptatem.
-            </div>
-            <div class="answer-box">
-              parentheses
-            </div>
-          </div> -->
         </div>
         <p class="question-tracker">1/10</p>
         <button class="button button-quit-game">Quit game</button>
@@ -106,7 +100,7 @@
         <p>Doncimacko 2018 &copy;</p>
       </footer>
     </div>
-  </div>
+  </div> -->
 
   <!-- <div class="container">
     <div class="error-container">
@@ -268,7 +262,7 @@
       </div>
     </div>
   </div> -->
-
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <script src="dist/main.js" charset="utf-8"></script>
 </body>
 
