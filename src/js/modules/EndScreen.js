@@ -27,7 +27,7 @@ export const paintStars = newGame => {
   }
 
   const $stars = Array.from(document.querySelectorAll('.star'))
-  //reset basic star color just in case
+  //reset basic star color
   $stars.forEach(star => star.style.fill = "#EF7667")
   //paint white stars
   $stars.forEach((star, i) => {
@@ -35,7 +35,7 @@ export const paintStars = newGame => {
       setTimeout(function() {
         sounds.star.play();
         star.style.fill = "whitesmoke";
-        console.log("starring");
+        console.log(`starring. index ${i}, starcount ${starCount}`);
       }, i * 300)
     }
   })

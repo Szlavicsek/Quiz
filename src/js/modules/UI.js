@@ -29,6 +29,13 @@ const renderScoreInfo = (newGame) => {
   `
 }
 
+export const closeOverlay = overlay => {
+  overlay.style.opacity = "0";
+  setTimeout(function() {
+    overlay.style.display = "none";
+  }, 300);
+}
+
 // Components to be parsed into other markup later on
 const footer = `
   <footer class="footer">
@@ -92,7 +99,7 @@ export const renderMenuDisplay = buttongroup => {
     <div class="big-background-logo-container">
       <h1 class="title">Quizzit</h1>
       <img class="circles" src="src/assets/header-circles-res.png" alt="">
-      <img src="src/assets/1x/ribbon-yellow.png" class="ribbon">
+      <img class="ribbon" src="src/assets/1x/ribbon-yellow.png">
     </div>
     <div class="button-group">
       ${buttongroup}
@@ -131,7 +138,7 @@ export const renderNewGameSettings = preloaded => {
     <div class="big-background-logo-container">
       <h1 class="title">Quizzit</h1>
       <img class="circles" src="src/assets/header-circles-res.png" alt="">
-      <img src="src/assets/1x/ribbon-yellow.png" class="ribbon">
+      <img class="ribbon" src="src/assets/1x/ribbon-yellow.png">
     </div>
     <div class="button-group">
       <button class="button button-difficulty">Medium</button>
@@ -149,6 +156,15 @@ export const renderNewGameSettings = preloaded => {
 export const renderQuestion = (answers_markup, question, answers, newGame) => {
   $contentWrapper.innerHTML = `
   <div class="overlay overlay--game-end"></div>
+  <div class="overlay overlay--in-game">
+    <div class="quit-option-container fully-centered">
+      <p>Do you want to quit the game?</p>
+      <div class="button-box">
+        <button class="button-stay-here">No</button>
+        <button class="button-main-menu">Yes</button>
+      </div>
+    </div>
+  </div>
   <div class="game-content">
     <div class="background-container">
       <img class="fully-centered" src="src/assets/header-circles-res.png" alt="">

@@ -7,14 +7,22 @@ $logo-font: 'Pacifico', cursive;
 $menu-components-font: 'Caveat', cursive;
 $question-font: 'Ubuntu', sans-serif;
 
-*{
+* {
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
-  user-select: none;
   ::selection {
     background-color: black;
   }
+}
+
+p, div, button {
+  -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
 }
 
 body {
@@ -25,15 +33,6 @@ body {
   background-color: $body-background;
   overflow-x: hidden;
   width: 100vw;
-}
-
-.content-wrapper {
-  position: relative;
-  overflow: hidden;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 /****************** COMPONENTS TO BE REUSED ******************/
@@ -69,6 +68,25 @@ body {
 .header-strap {
   background-color: Salmon;
   margin-top: -3px;
+}
+
+.loading-bar-container {
+  position: relative;
+  .loading-bar {
+    height: 3px;
+    background-color: powderblue;
+  }
+  &:before {
+    content: "";
+    position: absolute;
+    display: block;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: steelblue;
+    animation: loading-bar 1.5s cubic-bezier(.5,.01,.51,1) infinite;
+  }
 }
 
 .navbar {
@@ -112,28 +130,16 @@ body {
   cursor: pointer;
 }
 
-/********** loading bar component styles **********/
-.loading-bar-container {
+.content-wrapper {
   position: relative;
-  .loading-bar {
-    height: 3px;
-    background-color: powderblue;
-  }
-  &:before {
-    content: "";
-    position: absolute;
-    display: block;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: steelblue;
-    animation: loading-bar 1.5s cubic-bezier(.5,.01,.51,1) infinite;
-  }
+  overflow: hidden;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 /* MENU STYLES BEGIN (including settings menu) */
-
 
 .menu-content {
   width: 100%;
@@ -198,6 +204,7 @@ body {
 .option-container {
   max-height: 100%;
   width: 100%;
+  max-width: 750px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
@@ -212,7 +219,7 @@ body {
 .option-item {
   box-sizing: border-box;
   color: whitesmoke;
-  background-color: $button-background;
+  background: $button-background;
   border: 1px solid whitesmoke;
   border-radius: 100px;
   margin: 10px;
@@ -229,6 +236,23 @@ body {
   &:active {
     background-color: $button-background;
   }
+  &.loading-item {
+    background: linear-gradient(to bottom right, rgba(#fff, 0.2) 25%, transparent 25%, transparent 50%, rgba(#fff, 0.2) 50%, rgba(#fff, 0.2) 75%, transparent 75%, transparent);
+    background-color: $button-background;
+    background-size: 80px 80px;
+    animation: loading 1.5s linear infinite;
+  }
+}
+
+
+
+@keyframes loading {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 80px 0;
+  }
 }
 
 .vertical {
@@ -239,8 +263,8 @@ body {
 /******************* GAMEPLAY SCREEN STYLES *******************/
 
 .overlay--in-game {
-  display: block;
-  opacity: 1;
+  // display: block;
+  // opacity: 1;
 }
 
 .quit-option-container {
@@ -329,17 +353,30 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-align: center;
   margin: 5px;
+  font-family: $question-font;
   width: 100%;
   min-height: 8vh;
   background-color: #FA8072;
-  border: 1px solid whitesmoke;
+  border: 3px solid #FA8072;
   border-radius: 4px;
   transition: 0.25s border-color, 0.25s background-color;
   box-sizing: border-box;
   &:hover {
     cursor: pointer;
     background-color: #F56E5C;
+    border-color: #F56E5C;
+  }
+  &:after {
+  border: 1px solid #fff;
+  border-radius: 4px;
+  content: "";
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  right: -4px;
+  bottom: -4px;
   }
 }
 
@@ -347,7 +384,7 @@ body {
   .answer-group-container {
     justify-content: space-around;
     width: 90%;
-    height: 100%;
+    height: 35vh;
     .answer-box {
       width: 45%;
     }
@@ -476,18 +513,20 @@ body {
 
 .disabled {
   background-color: grey !important;
-  color: black !important;
-  cursor: not-allowed !important;
+  color: black;
+  &:hover {
+    cursor: not-allowed;
+  }
 }
 
 /* Larger than mobile */
 @media (min-width: 400px) {
   .answer-group-container {
-    flex-wrap: nowrap !important;
+    flex-wrap: nowrap;
   }
   .option-container {
     margin: 0 auto;
-    max-width: 90% !important;
+    width: 90%;
   }
   .answer-box {
     min-height: 20vh;

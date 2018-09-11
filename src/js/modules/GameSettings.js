@@ -22,13 +22,6 @@ const GameSettings = (() => {
     settings.maxAvailable = 50;
   }
 
-  const closeOverlay = overlay => {
-    overlay.style.opacity = "0";
-    setTimeout(function() {
-      overlay.style.display = "none";
-    }, 300);
-  }
-
   const setDifficulty = e => {
     let difficulty;
     switch (e.target.getAttribute("data-difficulty")) {
@@ -51,24 +44,25 @@ const GameSettings = (() => {
         .catch(err => console.log(err))
     }
     document.querySelector('.button-difficulty').innerText = e.target.innerText
-    closeOverlay(e.target.parentElement.parentElement)
+    UI.closeOverlay(e.target.parentElement.parentElement)
   }
 
   const setCategory = e => {
     settings.category = e.target.getAttribute("data-id")
-    document.querySelector('.button-category').innerText = e.target.innerText;
     if (settings.category !== "0") {
       checkAvailableQuantity(settings.category, e)
         .then(res => {
           adjustQuantity(res);
-          closeOverlay(e.target.parentElement.parentElement);
+          document.querySelector('.button-category').innerText = e.target.innerText;
+          UI.closeOverlay(e.target.parentElement.parentElement);
         })
         .catch(err => console.log(err))
     } else {
+      document.querySelector('.button-category').innerText = e.target.innerText;
       settings.maxAvailable = 50;
       settings.quantity = settings.desiredQuantity;
       refreshQuantityButtons();
-      closeOverlay(e.target.parentElement.parentElement);
+      UI.closeOverlay(e.target.parentElement.parentElement);
     }
   }
 
@@ -79,7 +73,7 @@ const GameSettings = (() => {
         settings.desiredQuantity = settings.quantity
       }
       refreshQuantityButtons();
-      closeOverlay(e.target.parentElement.parentElement)
+      UI.closeOverlay(e.target.parentElement.parentElement)
     }
   }
 
@@ -127,14 +121,14 @@ const GameSettings = (() => {
   const checkAvailableQuantity = async (cat, e) => {
     let response;
     try {
-      e.target.style.transform = "scale(1.2)"
+      e.target.classList.toggle("loading-item");
       UI.$loader.style.marginTop = "0px"
       const res = await fetch(`https://opentdb.com/api_count.php?category=${cat}`);
       response = res.json()
     } catch (e) {
       console.log(e);
     } finally {
-      e.target.style.transform = "scale(1)"
+      e.target.classList.toggle("loading-item");
       UI.$loader.style.marginTop = "-3px"
     }
     return response
@@ -176,10 +170,10 @@ const GameSettings = (() => {
 
   const selectFromOverlay = e => {
     if (e.target.matches(".overlay") && !e.target.matches(".overlay--game-end")) {
-      closeOverlay(e.target);
+      UI.closeOverlay(e.target);
       settings.overlayIsOpen = false;
     } else if (e.target.matches(".option-container")) {
-      closeOverlay(e.target.parentElement);
+      UI.closeOverlay(e.target.parentElement);
       settings.overlayIsOpen = false;
     } else if (e.target.matches(".option-item")) {
       if (e.target.parentElement.parentElement.matches(".options-overlay--difficulty")) {
@@ -205,7 +199,6 @@ const GameSettings = (() => {
       } else if (e.target.matches(".button-play")) {
         playClickEvent();
       } else if (e.target.matches(".button-main-menu")) {
-        //this listener is responsible for all the buttons which take the user back to the main menu
         UI.renderMenuDisplay(UI.buttonGroup_mainMenu);
       } else {
         selectFromOverlay(e);

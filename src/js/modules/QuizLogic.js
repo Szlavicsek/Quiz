@@ -36,19 +36,14 @@ const QuizLogic = (() => {
         sounds.correct.play();
         this.totalGotRight++;
         this.totalScore += this.scoring();
-        $guessBox.style.borderColor = "green";
+        $guessBox.style.backgroundColor = "#50B848";
       } else {
         sounds.wrong.play();
-        $guessBox.style.borderColor = "red";
-        $correctBox.style.borderColor = "green";
+        $guessBox.style.backgroundColor = "#FE4042";
+        $correctBox.style.backgroundColor = "#50B848";
       }
       $correctBox.classList.toggle("disable");
       this.currQuestionIndex++;
-      setTimeout(function() {
-        $guessBox.style.borderColor = "whitesmoke"
-        $correctBox.style.borderColor = "whitesmoke"
-        $correctBox.classList.toggle("disable");
-      }, waitTime);
     }
 
     canClick() {
@@ -145,6 +140,8 @@ const QuizLogic = (() => {
         guessClickEvent(guessedIndex);
       } else if (e.target.matches(".button-quit-game")) {
         quitGame();
+      } else if (e.target.matches(".button-stay-here") || e.target.matches(".button-box")) {
+        UI.closeOverlay(document.querySelector('.overlay--in-game'))
       }
     })
   }
