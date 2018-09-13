@@ -7,41 +7,8 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <meta name="google-signin-client_id" content="417021403949-p6qgc6i3t45gurg8guntpnj8a3v4gvee.apps.googleusercontent.com">
   <link rel="stylesheet" href="src/css/styles.css">
+
   <title>Quizzit</title>
-
-  <!-- **************************************************** -->
-  <script src="https://apis.google.com/js/api:client.js"></script>
-  <script>
-    var googleUser = {};
-    var startApp = function() {
-      gapi.load('auth2', function() {
-        // Retrieve the singleton for the GoogleAuth library and set up the client.
-        auth2 = gapi.auth2.init({
-          client_id: '417021403949-p6qgc6i3t45gurg8guntpnj8a3v4gvee.apps.googleusercontent.com',
-          cookiepolicy: 'single_host_origin',
-          // Request scopes in addition to 'profile' and 'email'
-          //scope: 'additional_scope'
-        });
-        attachSignin(document.getElementById('customBtn'));
-      });
-    };
-
-    function attachSignin(element) {
-      console.log(element.id);
-      auth2.attachClickHandler(element, {},
-        function(googleUser) {
-          console.log("heljsldk");
-          // document.getElementById('name').innerText = "Signed in: " +
-          //   googleUser.getBasicProfile().getName();
-        },
-        function(error) {
-          console.log(error.error);
-        });
-    }
-  </script>
-
-  <!-- **************************************************** -->
-
 </head>
 
 <body>
@@ -64,10 +31,11 @@
                 <h2 class="sign-in-text">Sign in</h2>
                 <img class="avatar-image" src="src/assets/user-avatar-default.jpg" alt="">
               </div>
-              <div id="gSignInWrapper">
+              <!-- <div id="gSignInWrapper">
                 <div id="customBtn" class="customGPlusSignIn">
                 </div>
-              </div>
+              </div> -->
+              <div id="my-signin2"></div>
             </div>
           </div>
         </nav>
@@ -306,11 +274,15 @@
       </div>
     </div>
   </div> -->
-  <script type="text/javascript">
-    startApp()
 
+  <script type="text/javascript">
     function onSuccess(googleUser) {
-      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+      myFunc()
+      var profile = googleUser.getBasicProfile();
+      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+      console.log('Name: ' + profile.getName());
+      console.log('Image URL: ' + profile.getImageUrl());
+      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
     }
 
     function onFailure(error) {
@@ -320,25 +292,18 @@
     function renderButton() {
       gapi.signin2.render('my-signin2', {
         'scope': 'profile email',
-        'width': 160,
+        'width': 200,
         'height': 45,
         'longtitle': true,
-        'theme': 'dark',
+        'theme': 'light',
         'onsuccess': onSuccess,
         'onfailure': onFailure
       });
     }
-
-    function onSignIn(googleUser) {
-      var profile = googleUser.getBasicProfile();
-      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-      console.log('Name: ' + profile.getName());
-      console.log('Image URL: ' + profile.getImageUrl());
-      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    }
   </script>
+
   <script src="dist/main.js" charset="utf-8"></script>
-  <script src="https://apis.google.com/js/platform.js" async defer></script>
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
 </body>
 
 </html>
