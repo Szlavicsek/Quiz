@@ -10,8 +10,8 @@ GameSettings.init();
 QuizLogic.init();
 Login.init();
 
-
 function onSignIn(googleUser) {
+  console.log("called");
   var profile = googleUser.getBasicProfile();
   console.log("ID: " + profile.getId()); // Don't send this directly to your server!
   console.log('Full Name: ' + profile.getName());
