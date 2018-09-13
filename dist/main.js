@@ -94,7 +94,7 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_MainMenu_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/MainMenu.js */ \"./src/js/modules/MainMenu.js\");\n/* harmony import */ var _modules_GeneralSettings_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/GeneralSettings.js */ \"./src/js/modules/GeneralSettings.js\");\n/* harmony import */ var _modules_GameSettings_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/GameSettings.js */ \"./src/js/modules/GameSettings.js\");\n/* harmony import */ var _modules_QuizLogic_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/QuizLogic.js */ \"./src/js/modules/QuizLogic.js\");\n\r\n\r\n\r\n\r\n\r\n// GeneralSettings.init();\r\n_modules_MainMenu_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].init();\r\n_modules_GameSettings_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"].init();\r\n_modules_QuizLogic_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"].init();\n\n//# sourceURL=webpack:///./src/js/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_MainMenu_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/MainMenu.js */ \"./src/js/modules/MainMenu.js\");\n/* harmony import */ var _modules_GeneralSettings_js__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/GeneralSettings.js */ \"./src/js/modules/GeneralSettings.js\");\n/* harmony import */ var _modules_GameSettings_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/GameSettings.js */ \"./src/js/modules/GameSettings.js\");\n/* harmony import */ var _modules_QuizLogic_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/QuizLogic.js */ \"./src/js/modules/QuizLogic.js\");\n/* harmony import */ var _modules_Login_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/Login.js */ \"./src/js/modules/Login.js\");\n\r\n\r\n\r\n\r\n\r\n\r\n// GeneralSettings.init();\r\n_modules_MainMenu_js__WEBPACK_IMPORTED_MODULE_0__[\"default\"].init();\r\n_modules_GameSettings_js__WEBPACK_IMPORTED_MODULE_2__[\"default\"].init();\r\n_modules_QuizLogic_js__WEBPACK_IMPORTED_MODULE_3__[\"default\"].init();\r\n_modules_Login_js__WEBPACK_IMPORTED_MODULE_4__[\"default\"].init();\r\n\r\nfunction onSignIn(googleUser) {\r\n  var profile = googleUser.getBasicProfile();\r\n  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.\r\n  console.log('Name: ' + profile.getName());\r\n  console.log('Image URL: ' + profile.getImageUrl());\r\n  console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.\r\n}\n\n//# sourceURL=webpack:///./src/js/index.js?");
 
 /***/ }),
 
@@ -131,6 +131,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _Qui
 
 "use strict";
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _UI_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UI.js */ \"./src/js/modules/UI.js\");\n\r\n\r\nconst Settings = (() => {\r\n  const $themeButton = document.querySelector('.button-theme');\r\n  const $soundButton = document.querySelector('.button-sound');\r\n\r\n  const eventListeners = function() {\r\n    window.addEventListener(\"click\", function(e) {})\r\n  }\r\n\r\n  const init = () => {\r\n    eventListeners();\r\n  }\r\n\r\n  return {\r\n    init,\r\n  }\r\n})()\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = (Settings);\n\n//# sourceURL=webpack:///./src/js/modules/GeneralSettings.js?");
+
+/***/ }),
+
+/***/ "./src/js/modules/Login.js":
+/*!*********************************!*\
+  !*** ./src/js/modules/Login.js ***!
+  \*********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\nconst Login = (() => {\r\n  const $signInText = document.querySelector('.sign-in-text')\r\n  const $avatarImage = document.querySelector('.avatar-image')\r\n  const $googleSignInButton = document.querySelector('.sign-in-with-google-button')\r\n  const $loginCube = document.querySelector('.login-cube')\r\n\r\n  const onSuccess = (googleUser) => {\r\n    console.log('Logged in as: ' + googleUser.getBasicProfile().getName());\r\n  }\r\n\r\n  const onFailure = (error) => {\r\n    console.log(error);\r\n  }\r\n\r\n  const renderButton = () => {\r\n    gapi.signin2.render('my-signin2', {\r\n      'scope': 'profile email',\r\n      'onsuccess': onSuccess,\r\n      'onfailure': onFailure\r\n    });\r\n  }\r\n\r\n  const eventListeners = () => {\r\n    $signInText.addEventListener(\"click\", function() {\r\n      console.log(\"hello\");\r\n      $loginCube.classList.toggle(\"login-cube-turned\")\r\n    })\r\n  }\r\n\r\n  const init = () => {\r\n    eventListeners()\r\n  }\r\n  return {\r\n    onSuccess,\r\n    onFailure,\r\n    renderButton,\r\n    init\r\n  }\r\n})()\r\n\r\n/* harmony default export */ __webpack_exports__[\"default\"] = (Login);\n\n//# sourceURL=webpack:///./src/js/modules/Login.js?");
 
 /***/ }),
 

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Caveat|Pacifico|Ubuntu');
+@import url('https://fonts.googleapis.com/css?family=Caveat|Pacifico|Ubuntu|Roboto');
 
 $body-background: #FA6752;
 $button-background: #F69085;
@@ -11,9 +11,6 @@ $question-font: 'Ubuntu', sans-serif;
   margin: 0;
   padding: 0;
   -webkit-tap-highlight-color: transparent;
-  ::selection {
-    background-color: black;
-  }
 }
 
 p, div, button {
@@ -92,12 +89,14 @@ body {
 .navbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   height: 65px;
   width: 100%;
   max-width: 750px;
   margin: 0 auto;
-  align-items: center;
 }
+
+/* left side of the navbar */
 
 .logo-container {
   height: 100%;
@@ -117,18 +116,87 @@ body {
   font-size: 30px;
   transform: translate(-8px, 4px) rotate(-15deg);
   color: #FBF9FC;
-  &::selection {
-    background-color: transparent;
+}
+
+/* right side of the navbar */
+
+.login-container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.login-cube {
+  margin-right: 10px;
+	text-align: center;
+	height: 40px;
+	transition: transform 0.3s;
+	transform-style: preserve-3d;
+}
+
+.login-cube-turned {
+	-webkit-transform: rotateX(89deg);
+      -ms-transform: rotateX(89deg);
+	        transform: rotateX(89deg);
+}
+
+.sign-in-button,.sign-in-with-google-button {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+	height: 40px;
+}
+
+.sign-in-button {
+	transform: translateZ(20px);
+}
+
+.sign-in-text {
+  margin-left: auto;
+  padding: 5px 10px;
+  font-family: $logo-font;
+  font-size: 1.1rem;
+  font-weight: lighter;
+  color: whitesmoke;
+  &:hover {
+    text-decoration: underline;
+    cursor: pointer;
   }
 }
 
 .avatar-image {
-  width: 50px;
-  height: 50px;
-  margin-right: 20px;
+  height: 90%;
   border-radius: 100%;
   cursor: pointer;
 }
+
+#gSignInWrapper {
+  width: 200px;
+  height: 45px;
+  transform: rotateX(-90deg) translateY(-3px) translateZ(-20px);
+  cursor: pointer;
+}
+
+#customBtn {
+  display: block;
+  background: url("../assets/btn_google_signin_light_normal_web@2x.png") no-repeat !important;
+  background-size: cover !important;
+  width: 190px;
+  height: 100%;
+  border-radius: 5px;
+  border: none !important;
+  box-shadow: none !important;
+  white-space: nowrap;
+  &:hover {
+    cursor: pointer;
+  }
+  &:active {
+    background-image: url("../assets/btn_google_signin_light_pressed_web@2x.png");
+  }
+}
+
+/* navbar end */
 
 .content-wrapper {
   position: relative;
@@ -518,6 +586,46 @@ body {
     cursor: not-allowed;
   }
 }
+
+#customBtn {
+  display: inline-block;
+  background: white;
+  color: #444;
+  width: 190px;
+  border-radius: 5px;
+  border: thin solid #888;
+  box-shadow: 1px 1px 1px grey;
+  white-space: nowrap;
+}
+
+#customBtn:hover {
+  cursor: pointer;
+}
+
+span.label {
+  font-family: serif;
+  font-weight: normal;
+}
+
+span.icon {
+  background: url('../assets/g-logo.png') transparent 5px 50% no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+  width: 42px;
+  height: 42px;
+}
+
+span.buttonText {
+  display: inline-block;
+  vertical-align: middle;
+  padding-left: 42px;
+  padding-right: 42px;
+  font-size: 14px;
+  font-weight: bold;
+  /* Use the Roboto font that is loaded in the <head> */
+  font-family: 'Roboto', sans-serif;
+}
+
 
 /* Larger than mobile */
 @media (min-width: 400px) {
