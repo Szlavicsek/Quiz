@@ -56,6 +56,8 @@ const Login = (() => {
         'onfailure': onFailure
       });
     }
+
+    eventListeners()
   }
 
   return {
