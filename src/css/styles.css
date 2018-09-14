@@ -116,7 +116,6 @@ body {
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 0 10px;
 }
 
 .login-cube {
@@ -135,7 +134,7 @@ body {
 
 .sign-in-button, .sign-in-with-google-button {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
   height: 40px;
 }
@@ -164,9 +163,9 @@ body {
   cursor: pointer;
 }
 
-#login {
-  transform: rotateX(-90deg) translateY(-3px) translateZ(-20px) scale(0.9);
-  border-radius: 10px !important;
+#google-signin-button {
+  transform: rotateX(-90deg) translateY(-3px) translateZ(-20px) scale(0.8);
+  margin-right: -20px;
 }
 
 /* navbar end */

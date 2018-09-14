@@ -124,7 +124,6 @@ body {
   height: 100%;
   display: flex;
   align-items: center;
-  padding: 0 10px;
 }
 
 .login-cube {
@@ -143,7 +142,7 @@ body {
 
 .sign-in-button,.sign-in-with-google-button {
   display: flex;
-  justify-content: space-around;
+  justify-content: flex-end;
   align-items: center;
 	height: 40px;
 }
@@ -171,34 +170,9 @@ body {
   cursor: pointer;
 }
 
-// #gSignInWrapper, #my-signin2{
-//   width: 200px;
-//   height: 45px;
-//   transform: rotateX(-90deg) translateY(-3px) translateZ(-20px);
-//   cursor: pointer;
-// }
-//
-// #customBtn, #my-signin2{
-//   display: block;
-//   background: url("../assets/btn_google_signin_light_normal_web@2x.png") no-repeat !important;
-//   background-size: cover !important;
-//   width: 190px;
-//   height: 100%;
-//   border-radius: 5px;
-//   border: none !important;
-//   box-shadow: none !important;
-//   white-space: nowrap;
-//   &:hover {
-//     cursor: pointer;
-//   }
-//   &:active {
-//     background-image: url("../assets/btn_google_signin_light_pressed_web@2x.png");
-//   }
-// }
-
-#login {
-  transform: rotateX(-90deg) translateY(-3px) translateZ(-20px) scale(0.9);
-  border-radius: 10px !important;
+#google-signin-button {
+  transform: rotateX(-90deg) translateY(-3px) translateZ(-20px) scale(0.8);
+  margin-right: -20px;
 }
 
 /* navbar end */
