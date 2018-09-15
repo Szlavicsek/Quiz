@@ -9,11 +9,12 @@ const Login = (() => {
   }
 
   const eventListeners = () => {
-    $signInText.addEventListener("click", function() {
+    $signInText.addEventListener("click", function(e) {
       if (state.signedIn) {
         window.signOut();
       } else {
         $loginCube.classList.add("login-cube-turned")
+        console.log(e.target);
       }
     })
   }
@@ -39,10 +40,11 @@ const Login = (() => {
     }
 
     window.signOut = function() {
+      state.signedIn = false;
+
       $signInText.innerText = "Sign in";
-      $avatarImage.src = "../../assets/user-avatar-default.jpg"
-      console.log(this);
-      console.log(state);
+      $avatarImage.src = "src/assets/user-avatar-default.jpg"
+
       var auth2 = gapi.auth2.getAuthInstance();
       auth2.signOut().then(function() {
         console.log('User signed out.');
