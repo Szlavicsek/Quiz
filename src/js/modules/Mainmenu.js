@@ -1,5 +1,7 @@
 import * as UI from "./UI.js"
-
+import {
+  sounds
+} from "./sounds.js"
 const MainMenu = (() => {
   let preloadedCategories;
 
@@ -52,6 +54,25 @@ const MainMenu = (() => {
         }
       } else if (e.target.matches(".button-settings")) {
         UI.renderMenuDisplay(UI.buttonGroup_generalSettings);
+      } else if (e.target.matches(".button-about")) {
+        UI.renderMenuDisplay(UI.buttonGroup_about);
+      } else if (e.target.matches(".button-playright")) {
+        console.log(sounds);
+        sounds.correct.play()
+      } else if (e.target.matches(".button-playwrong")) {
+        sounds.wrong.play()
+      } else if (e.target.matches(".button-playstar")) {
+        sounds.star.play()
+      } else if (e.target.matches(".button-playall")) {
+        let counter = 0;
+        const playsounds = setInterval(function() {
+          sounds.star.play()
+          counter++
+          if (counter > 5) {
+            clearInterval(playsounds)
+          }
+        }, 500)
+        playSounds()
       };
     });
   };
