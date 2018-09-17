@@ -50,8 +50,11 @@ export const buttonGroup_mainMenu = `
 `
 
 export const buttonGroup_generalSettings = `
-  <button class="button button-theme">Theme: Coral</button>
-  <button class="button button-sound">Sound: On</button>
+  <button class="button button-setSound">Sound: On</button>
+  <button class="button button-main-menu">Back</button>
+`
+
+export const buttonGroup_about = `
   <button class="button button-main-menu">Back</button>
 `
 

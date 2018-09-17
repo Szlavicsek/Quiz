@@ -10,27 +10,3 @@ GameSettings.init();
 QuizLogic.init();
 Login.init();
 GeneralSettings.init();
-
-
-async function post(data) {
-  const resp = await fetch("../json/users.json", {
-    method: "POST",
-    headers: {
-      "Content-type": "application/json"
-    },
-    body: JSON.stringify(data)
-  })
-  const res = resp.json();
-  return res
-}
-
-const userpoints = {
-  id: 123456789,
-  points: 67576
-}
-
-post(userpoints)
-  .then(res => console.log(res))
-  .catch(err => console.log(err))
-
-console.log("test1");

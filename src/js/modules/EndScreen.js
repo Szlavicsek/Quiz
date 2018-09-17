@@ -4,6 +4,7 @@ import GameSettings from "./GameSettings.js"
 import {
   sounds
 } from './sounds.js'
+import GeneralSettings from "./GeneralSettings.js"
 
 export const paintStars = newGame => {
   const percentage = newGame.totalGotRight / newGame.questions.length.toFixed(2) * 100;
@@ -33,9 +34,10 @@ export const paintStars = newGame => {
   $stars.forEach((star, i) => {
     if (i < starCount) {
       setTimeout(function() {
-        sounds.star.play();
+        if (GeneralSettings.state.sound) {
+          sounds.star.play();
+        }
         star.style.fill = "whitesmoke";
-        console.log(`starring. index ${i}, starcount ${starCount}`);
       }, i * 300)
     }
   })

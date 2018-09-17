@@ -2,6 +2,7 @@ import * as UI from "./UI.js"
 import {
   sounds
 } from './sounds.js'
+import GeneralSettings from "./GeneralSettings.js"
 
 const QuizLogic = (() => {
 
@@ -33,12 +34,16 @@ const QuizLogic = (() => {
       const $guessBox = Array.from(document.querySelectorAll('.answer-box'))[guessedIndex];
       const $correctBox = Array.from(document.querySelectorAll('.answer-box'))[correctAnswerIndex];
       if (isCorrect) {
-        sounds.correct.play();
+        if (GeneralSettings.state.sound) {
+          sounds.correct.play();
+        }
         this.totalGotRight++;
         this.totalScore += this.scoring();
         $guessBox.style.backgroundColor = "#50B848";
       } else {
-        sounds.wrong.play();
+        if (GeneralSettings.state.sound) {
+          sounds.wrong.play();
+        }
         $guessBox.style.backgroundColor = "#FE4042";
         $correctBox.style.backgroundColor = "#50B848";
       }
