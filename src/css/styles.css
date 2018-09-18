@@ -298,7 +298,6 @@ body {
   flex-direction: column;
 }
 
-/*end*/
 /******************* GAMEPLAY SCREEN STYLES *******************/
 .quit-option-container {
   color: white;
@@ -419,6 +418,16 @@ body {
   left: -4px;
   right: -4px;
   bottom: -4px;
+}
+
+.correct {
+  background-color: #50B848 !important;
+  border-color: #50B848 !important;
+}
+
+.wrong {
+  background-color: #FE4042 !important;
+  border-color: #FE4042 !important;
 }
 
 .truefalse .answer-group-container {
@@ -601,7 +610,6 @@ span.buttonText {
   padding-right: 42px;
   font-size: 14px;
   font-weight: bold;
-  /* Use the Roboto font that is loaded in the <head> */
   font-family: 'Roboto', sans-serif;
 }
 

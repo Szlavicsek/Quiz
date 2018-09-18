@@ -39,13 +39,13 @@ const QuizLogic = (() => {
         }
         this.totalGotRight++;
         this.totalScore += this.scoring();
-        $guessBox.style.backgroundColor = "#50B848";
+        $guessBox.classList.add("correct")
       } else {
         if (GeneralSettings.state.sound) {
           sounds.wrong.play();
         }
-        $guessBox.style.backgroundColor = "#FE4042";
-        $correctBox.style.backgroundColor = "#50B848";
+        $guessBox.classList.add("wrong")
+        $correctBox.classList.add("correct")
       }
       $correctBox.classList.toggle("disable");
       this.currQuestionIndex++;

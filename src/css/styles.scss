@@ -292,8 +292,6 @@ body {
   }
 }
 
-
-
 @keyframes loading {
   0% {
     background-position: 0 0;
@@ -306,14 +304,8 @@ body {
 .vertical {
   flex-direction: column;
 }
-/*end*/
 
 /******************* GAMEPLAY SCREEN STYLES *******************/
-
-.overlay--in-game {
-  // display: block;
-  // opacity: 1;
-}
 
 .quit-option-container {
   color: white;
@@ -426,6 +418,16 @@ body {
   right: -4px;
   bottom: -4px;
   }
+}
+
+.correct {
+  background-color: #50B848 !important;
+  border-color: #50B848 !important;
+}
+
+.wrong {
+  background-color: #FE4042 !important;
+  border-color: #FE4042 !important;
 }
 
 .truefalse {
@@ -602,10 +604,8 @@ span.buttonText {
   padding-right: 42px;
   font-size: 14px;
   font-weight: bold;
-  /* Use the Roboto font that is loaded in the <head> */
   font-family: 'Roboto', sans-serif;
 }
-
 
 /* Larger than mobile */
 @media (min-width: 400px) {
