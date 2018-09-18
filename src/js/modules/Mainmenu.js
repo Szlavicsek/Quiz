@@ -57,12 +57,14 @@ const MainMenu = (() => {
       } else if (e.target.matches(".button-about")) {
         UI.renderMenuDisplay(UI.buttonGroup_about);
       } else if (e.target.matches(".button-playright")) {
-        console.log(sounds);
-        sounds.correct.play()
+        const correct = new Audio('./src/assets/sounds/correct-long.mp3')
+        correct.play()
       } else if (e.target.matches(".button-playwrong")) {
-        sounds.wrong.play()
+        const wrong = new Audio('./src/assets/sounds/wrong-long.mp3')
+        wrong.play()
       } else if (e.target.matches(".button-playstar")) {
-        sounds.star.play()
+        const star = new Audio('./src/assets/sounds/star-long.mp3')
+        star.play()
       } else if (e.target.matches(".button-playall")) {
         let counter = 0;
         const playsounds = setInterval(function() {
