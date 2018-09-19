@@ -37,6 +37,7 @@ export const getStarCount = (newGame) => {
       message = "Nice one! You totally nailed it."
       break;
   }
+
   return {
     starCount,
     message
@@ -63,5 +64,5 @@ export const paintStars = newGame => {
 export const animateRibbon = () => {
   const $ribbonContainer = document.querySelector('.ribbon-container');
   $ribbonContainer.style.opacity = "1";
-  $ribbonContainer.style.transform = "translateY(0px) scale(1)"
+  $ribbonContainer.style.transform = "translateY(0px) scale(1)";
 }

@@ -88,8 +88,8 @@ const QuizLogic = (() => {
     const quantity = settings.quantity;
     const category = settings.category;
     const difficulty = settings.difficulty;
-    fetchQuestions(quantity, category, difficulty);
-    .then(res => {
+    fetchQuestions(quantity, category, difficulty)
+      .then(res => {
         const questions = [...res.results];
         questions.map(q => {
           const randomizedCorrectIndex = Math.floor(Math.random() * 4);
