@@ -57,12 +57,6 @@ const MainMenu = (() => {
         UI.renderMenuDisplay(UI.buttonGroup_generalSettings);
       } else if (e.target.matches(".button-about")) {
         UI.renderMenuDisplay(UI.buttonGroup_about);
-      } else if (e.target.matches(".button-playright")) {
-        sounds.correct.play();
-      } else if (e.target.matches(".button-playwrong")) {
-        sounds.wrong.play();
-      } else if (e.target.matches(".button-playstar")) {
-        sounds.star.play();
       }
     })
   };

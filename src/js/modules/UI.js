@@ -55,9 +55,7 @@ export const buttonGroup_generalSettings = `
 `
 
 export const buttonGroup_about = `
-  <button class="button button-playright">Correct</button>
-  <button class="button button-playwrong">Wrong</button>
-  <button class="button button-playstar">Star</button>
+  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A inventore illo maxime, fugiat enim numquam facilis beatae, earum doloremque, veniam id consequuntur aliquam temporibus quo, autem ea impedit. Ipsam, asperiores ea eos cumque autem ut dolorum delectus nesciunt tempore ab.</p>
   <button class="button button-main-menu">Back</button>
 `
 

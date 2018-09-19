@@ -3,7 +3,7 @@ import {
   Howler
 } from 'howler';
 
-Howler.volume(0.5);
+Howler.volume(1);
 
 export const sounds = {
   star: new Howl({
