@@ -3,6 +3,8 @@ import {
   Howler
 } from 'howler';
 
+// praise the howler gods https://github.com/goldfire/howler.js/
+
 export const sounds = {
   star: new Howl({
     src: ['./src/assets/sounds/star.ogg', './src/assets/sounds/star.mp3']

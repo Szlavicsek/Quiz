@@ -36,16 +36,14 @@ const Login = (() => {
   }
 
   const init = () => {
+    // Google login stuff
     window.onSuccess = function(googleUser) {
       state.signedIn = true;
       state.currentlySigningIn = false;
-
       const profile = googleUser.getBasicProfile();
-
       $signInText.innerText = "Sign out";
       $avatarImage.src = profile.getImageUrl();
       $loginCube.classList.remove("login-cube-turned");
-
       console.log('ID: ' + profile.getId());
     }
 
@@ -55,10 +53,8 @@ const Login = (() => {
 
     window.signOut = function() {
       state.signedIn = false;
-
       $signInText.innerText = "Sign in";
       $avatarImage.src = "src/assets/user-avatar-default.jpg";
-
       var auth2 = gapi.auth2.getAuthInstance();
       auth2.signOut().then(function() {
         console.log('User signed out.');

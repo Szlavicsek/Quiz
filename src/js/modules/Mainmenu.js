@@ -7,6 +7,7 @@ import GeneralSettings from './GeneralSettings.js'
 const MainMenu = (() => {
   let preloadedCategories;
 
+  // checks and returns all available category names in the trivia db
   async function getCategories() {
     let json;
     try {
@@ -22,7 +23,7 @@ const MainMenu = (() => {
     return json;
   }
 
-  // Preload and pre-render every category for future "New Game" overlay
+  // preload categories. Starting a new game is disabled while loading
   const preloadCategories = () => {
     let rendered = ``;
     getCategories()

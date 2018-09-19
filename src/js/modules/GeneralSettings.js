@@ -4,8 +4,8 @@ import {
   Howler
 } from 'howler';
 
-const Settings = (() => {
-  const $themeButton = document.querySelector('.button-theme');
+const GeneralSettings = (() => {
+
   const $soundButton = document.querySelector('.button-sound');
 
   const state = {
@@ -38,4 +38,4 @@ const Settings = (() => {
   }
 })()
 
-export default Settings
+export default GeneralSettings

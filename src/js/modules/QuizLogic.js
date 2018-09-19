@@ -92,6 +92,7 @@ const QuizLogic = (() => {
       .then(res => {
         const questions = [...res.results];
         questions.map(q => {
+          // mix correct answer with the incorrect ones
           const randomizedCorrectIndex = Math.floor(Math.random() * 4);
           const incorrectAnswers = [...q.incorrect_answers]; // either consists of 1 or 3
           if (incorrectAnswers.length === 1) {
@@ -106,7 +107,10 @@ const QuizLogic = (() => {
         newGame = new Game(questions);
         loadNewQuestion(newGame.getCurrQuestion());
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        const message = "Sorry, we couldn't fetch the questions. Please retry later.";
+        UI.showErrorMessage(message);
+      });
   }
 
   const loadNewQuestion = currQuestion => {
@@ -117,7 +121,10 @@ const QuizLogic = (() => {
     }
   }
 
+  // click event functions
+
   const guessClickEvent = (guessedIndex) => {
+    // set how much time should pass until moving on to the next question
     const waitTime = 1500;
     const isCorrect = newGame.isCorrect(guessedIndex);
     newGame.updateScore(isCorrect, guessedIndex, waitTime);
@@ -126,10 +133,11 @@ const QuizLogic = (() => {
         loadNewQuestion(newGame.getCurrQuestion());
       } else {
         UI.renderGameEndScreen(newGame);
+        // make end-screen message appear a bit later
         setTimeout(function() {
           document.querySelector('.message').style.opacity = 1;
-        }, 1000)
-      }
+        }, 500);
+      };
     }, waitTime);
   }
 
@@ -138,10 +146,10 @@ const QuizLogic = (() => {
     $overlay.style.display = "block";
     setTimeout(function() {
       $overlay.style.opacity = "1";
-    }, 15)
+    }, 15);
   }
 
-  const eventListeners = () => { // check
+  const eventListeners = () => {
     window.addEventListener("click", function(e) {
       if (e.target.matches(".answer-box") && newGame.canClick()) {
         const guessedIndex = Array.from(document.querySelectorAll('.answer-box')).indexOf(e.target);

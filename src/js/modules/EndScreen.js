@@ -6,6 +6,7 @@ import {
 } from './sounds.js'
 import GeneralSettings from "./GeneralSettings.js"
 
+// checks how many stars the player gets and returns it with a corresponding message
 export const getStarCount = (newGame) => {
   const percentage = newGame.totalGotRight / newGame.questions.length.toFixed(2) * 100;
   const messages = ["I want your brain.", "Marvelous!", "Wow.", "Unstoppable.", "Hat's off.", "Now that's an ace."]

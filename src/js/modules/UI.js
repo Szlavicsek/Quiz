@@ -12,6 +12,8 @@ const $contentWrapper = document.querySelector('.content-wrapper')
 
 export const $loader = document.querySelector('.header-strap')
 
+// UI functions
+
 const animateButtons = () => {
   const $buttons = Array.from(document.querySelectorAll('.button'))
   $buttons.forEach(button => button.style.opacity = "0")
@@ -22,14 +24,6 @@ const animateButtons = () => {
   })
 }
 
-const renderScoreInfo = (newGame) => {
-  return `
-    <p class="result-info score">Score: ${newGame.totalGotRight}/${newGame.questions.length}</p>
-    <p class="result-info points">+${newGame.totalScore} Points</p>
-    <p class="result-info message">${getStarCount(newGame).message}</p>
-  `
-}
-
 export const closeOverlay = overlay => {
   overlay.style.opacity = "0";
   setTimeout(function() {
@@ -37,12 +31,35 @@ export const closeOverlay = overlay => {
   }, 300);
 }
 
-// Components to be parsed into other markup later on
+export const showErrorMessage = (msg, retryCb) => {
+  if (retryCb) {
+    // retry connection to the db
+    retryCb()
+  }
+  $errorMessage.innerText = msg;
+  $errorContainer.style.display = "block";
+  setTimeout(function() {
+    $errorContainer.style.transform = "translateY(0%)";
+  }, 15);
+  setTimeout(function() {
+    $errorContainer.style.transform = "translateY(-100%)"
+  }, 4000);
+}
+
+// DOM components
+
 const footer = `
   <footer class="footer">
     <p>Doncimacko 2018 &copy;</p>
   </footer>
 `
+const renderScoreInfo = (newGame) => {
+  return `
+    <p class="result-info score">Score: ${newGame.totalGotRight}/${newGame.questions.length}</p>
+    <p class="result-info points">+${newGame.totalScore} Points</p>
+    <p class="result-info message">${getStarCount(newGame).message}</p>
+  `
+}
 
 export const buttonGroup_mainMenu = `
   <button class="button button-new-game">New Game</button>
@@ -99,6 +116,8 @@ export const boolAnswers = answers => {
   </div>
   `
 }
+
+// DOM containers
 
 export const renderMenuDisplay = buttongroup => {
   $contentWrapper.innerHTML = `
@@ -189,7 +208,7 @@ export const renderQuestion = (answers_markup, question, answers, newGame) => {
 };
 
 export const renderGameEndScreen = newGame => {
-  const $overlay_gameEnd = document.querySelector('.overlay--game-end')
+  const $overlay_gameEnd = document.querySelector('.overlay--game-end');
   $overlay_gameEnd.innerHTML = `
   <div class="game-end-screen-content">
     <div class="ribbon-container">
@@ -243,17 +262,3 @@ export const renderGameEndScreen = newGame => {
     paintStars(newGame)
   }, 500)
 };
-
-export const showErrorMessage = (msg, retryCb) => {
-  if (retryCb) {
-    retryCb()
-  }
-  $errorMessage.innerText = msg;
-  $errorContainer.style.display = "block";
-  setTimeout(function() {
-    $errorContainer.style.transform = "translateY(0%)";
-  }, 15);
-  setTimeout(function() {
-    $errorContainer.style.transform = "translateY(-100%)"
-  }, 4000);
-}
