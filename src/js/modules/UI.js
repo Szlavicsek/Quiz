@@ -1,4 +1,5 @@
 import {
+  getStarCount,
   paintStars,
   animateRibbon
 } from './EndScreen.js'
@@ -25,7 +26,7 @@ const renderScoreInfo = (newGame) => {
   return `
     <p class="result-info score">Score: ${newGame.totalGotRight}/${newGame.questions.length}</p>
     <p class="result-info points">+${newGame.totalScore} Points</p>
-    <p class="result-info message"></p>
+    <p class="result-info message">${getStarCount(newGame).message}</p>
   `
 }
 
@@ -49,13 +50,15 @@ export const buttonGroup_mainMenu = `
   <button class="button button-settings">Settings</button>
 `
 
-export const buttonGroup_generalSettings = `
-  <button class="button button-setSound">Sound: On</button>
-  <button class="button button-main-menu">Back</button>
-`
+export const buttonGroup_generalSettings = (volume) => {
+  return `
+    <button class="button button-setSound">Sound: ${volume}</button>
+    <button class="button button-main-menu">Back</button>
+  `
+}
 
 export const buttonGroup_about = `
-  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. A inventore illo maxime, fugiat enim numquam facilis beatae, earum doloremque, veniam id consequuntur aliquam temporibus quo, autem ea impedit. Ipsam, asperiores ea eos cumque autem ut dolorum delectus nesciunt tempore ab.</p>
+  <p class="aboutText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A inventore illo maxime, fugiat enim numquam facilis beatae, earum doloremque, veniam id consequuntur aliquam temporibus quo, autem ea impedit. Ipsam, asperiores ea eos cumque autem ut dolorum delectus nesciunt tempore ab <a href="https://loremipsum.io/">more lorem ipsum</a></p>
   <button class="button button-main-menu">Back</button>
 `
 
@@ -164,8 +167,8 @@ export const renderQuestion = (answers_markup, question, answers, newGame) => {
     <div class="quit-option-container fully-centered">
       <p>Do you want to quit the game?</p>
       <div class="button-box">
-        <button class="button-stay-here">No</button>
-        <button class="button-main-menu">Yes</button>
+        <button class="button button-stay-here">No</button>
+        <button class="button button-main-menu">Yes</button>
       </div>
     </div>
   </div>

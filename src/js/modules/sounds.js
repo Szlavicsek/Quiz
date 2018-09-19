@@ -3,8 +3,6 @@ import {
   Howler
 } from 'howler';
 
-Howler.volume(1);
-
 export const sounds = {
   star: new Howl({
     src: ['./src/assets/sounds/star.ogg', './src/assets/sounds/star.mp3']

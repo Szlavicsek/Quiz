@@ -2,6 +2,7 @@ import * as UI from "./UI.js"
 import {
   sounds
 } from "./sounds.js"
+import GeneralSettings from './GeneralSettings.js'
 
 const MainMenu = (() => {
   let preloadedCategories;
@@ -53,8 +54,10 @@ const MainMenu = (() => {
           const message = "Sorry, it seems like the server is down. Please retr later."
           UI.showErrorMessage(message, preloadCategories);
         }
+      } else if (e.target.matches(".logo") || e.target.matches(".logo-container")) {
+        UI.renderMenuDisplay(UI.buttonGroup_mainMenu);
       } else if (e.target.matches(".button-settings")) {
-        UI.renderMenuDisplay(UI.buttonGroup_generalSettings);
+        UI.renderMenuDisplay(UI.buttonGroup_generalSettings(GeneralSettings.state.sound ? "On" : "Off"));
       } else if (e.target.matches(".button-about")) {
         UI.renderMenuDisplay(UI.buttonGroup_about);
       }

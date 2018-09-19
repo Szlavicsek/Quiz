@@ -126,6 +126,9 @@ const QuizLogic = (() => {
         loadNewQuestion(newGame.getCurrQuestion());
       } else {
         UI.renderGameEndScreen(newGame);
+        setTimeout(function() {
+          document.querySelector('.message').style.opacity = 1;
+        }, 1000)
       }
     }, waitTime);
   }

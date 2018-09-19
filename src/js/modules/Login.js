@@ -5,6 +5,8 @@ const Login = (() => {
   const $loginCube = document.querySelector('.login-cube')
 
   const state = {
+    loginCubeTurned: false,
+    currentlySigningIn: false,
     signedIn: false
   }
 
@@ -13,7 +15,22 @@ const Login = (() => {
       if (state.signedIn) {
         window.signOut();
       } else {
-        $loginCube.classList.add("login-cube-turned")
+        $loginCube.classList.add("login-cube-turned");
+        state.loginCubeTurned = true;
+        setTimeout(function() {
+          if (!state.currentlySigningIn && state.loginCubeTurned) {
+            $loginCube.classList.remove("login-cube-turned");
+          }
+        }, 5000)
+      }
+    });
+
+    window.addEventListener("click", function(e) {
+      if (!e.target.closest(".login-cube") && state.loginCubeTurned) {
+        $loginCube.classList.remove("login-cube-turned");
+        state.loginCubeTurned = false;
+      } else if (e.target.closest(".abcRioButtonContentWrapper") && state.loginCubeTurned) {
+        state.currentlySigningIn = true;
       }
     })
   }
@@ -21,17 +38,15 @@ const Login = (() => {
   const init = () => {
     window.onSuccess = function(googleUser) {
       state.signedIn = true;
+      state.currentlySigningIn = false;
 
       const profile = googleUser.getBasicProfile();
 
       $signInText.innerText = "Sign out";
-      $avatarImage.src = profile.getImageUrl()
-      $loginCube.classList.remove("login-cube-turned")
+      $avatarImage.src = profile.getImageUrl();
+      $loginCube.classList.remove("login-cube-turned");
 
-      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-      console.log('Name: ' + profile.getName());
-      console.log('Image URL: ' + profile.getImageUrl());
-      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+      console.log('ID: ' + profile.getId());
     }
 
     window.onFailure = function(error) {
@@ -42,7 +57,7 @@ const Login = (() => {
       state.signedIn = false;
 
       $signInText.innerText = "Sign in";
-      $avatarImage.src = "src/assets/user-avatar-default.jpg"
+      $avatarImage.src = "src/assets/user-avatar-default.jpg";
 
       var auth2 = gapi.auth2.getAuthInstance();
       auth2.signOut().then(function() {
@@ -62,7 +77,7 @@ const Login = (() => {
       });
     }
 
-    eventListeners()
+    eventListeners();
   }
 
   return {

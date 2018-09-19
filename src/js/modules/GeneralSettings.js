@@ -1,4 +1,8 @@
 import * as UI from "./UI.js"
+import {
+  Howl,
+  Howler
+} from 'howler';
 
 const Settings = (() => {
   const $themeButton = document.querySelector('.button-theme');
@@ -13,10 +17,12 @@ const Settings = (() => {
       if (e.target.matches(".button-setSound")) {
         if (state.sound) {
           e.target.innerText = "Sound: Off";
-          state.sound = false
+          Howler.volume(0);
+          state.sound = false;
         } else {
           e.target.innerText = "Sound: On";
-          state.sound = true
+          Howler.volume(1);
+          state.sound = true;
         }
       }
     })
