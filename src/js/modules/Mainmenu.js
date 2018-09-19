@@ -1,7 +1,22 @@
 import * as UI from "./UI.js"
+// import {
+//   sounds
+// } from "./sounds.js"
 import {
-  sounds
-} from "./sounds.js"
+  Howl,
+  Howler
+} from 'howler';
+
+const she = new Howl({
+  src: ['./src/assets/sounds/She - 1997.ogg', './src/assets/sounds/She - 1997.mp3']
+});
+
+const ceila = new Howl({
+  src: ['./src/assets/sounds/ceila.ogg', './src/assets/sounds/ceila.mp3']
+});
+
+// Change global volume.
+Howler.volume(0.5);
 
 const MainMenu = (() => {
   let preloadedCategories;
