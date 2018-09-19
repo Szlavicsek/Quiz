@@ -55,10 +55,9 @@ export const buttonGroup_generalSettings = `
 `
 
 export const buttonGroup_about = `
-  <button class="button button-playright">Ceila</button>
-  <button class="button button-playwrong">She</button>
+  <button class="button button-playright">Correct</button>
+  <button class="button button-playwrong">Wrong</button>
   <button class="button button-playstar">Star</button>
-  <button class="button button-playall">All</button>
   <button class="button button-main-menu">Back</button>
 `
 

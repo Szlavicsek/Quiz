@@ -1,22 +1,7 @@
 import * as UI from "./UI.js"
-// import {
-//   sounds
-// } from "./sounds.js"
 import {
-  Howl,
-  Howler
-} from 'howler';
-
-const she = new Howl({
-  src: ['./src/assets/sounds/She - 1997.ogg', './src/assets/sounds/She - 1997.mp3']
-});
-
-const ceila = new Howl({
-  src: ['./src/assets/sounds/ceila.ogg', './src/assets/sounds/ceila.mp3']
-});
-
-// Change global volume.
-Howler.volume(0.5);
+  sounds
+} from "./sounds.js"
 
 const MainMenu = (() => {
   let preloadedCategories;
@@ -73,11 +58,11 @@ const MainMenu = (() => {
       } else if (e.target.matches(".button-about")) {
         UI.renderMenuDisplay(UI.buttonGroup_about);
       } else if (e.target.matches(".button-playright")) {
-        ceila.play();
+        sounds.correct.play();
       } else if (e.target.matches(".button-playwrong")) {
-        she.play();
+        sounds.wrong.play();
       } else if (e.target.matches(".button-playstar")) {
-        star.play();
+        sounds.star.play();
       }
     })
   };

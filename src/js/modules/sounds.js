@@ -1,8 +1,21 @@
+import {
+  Howl,
+  Howler
+} from 'howler';
+
+Howler.volume(0.5);
+
 export const sounds = {
-  star: new Audio('./src/assets/sounds/star-long.mp3'),
-  click: new Audio('./src/assets/sounds/click-long.mp3'),
-  correct: new Audio('./src/assets/sounds/correct.mp3'),
-  wrong: new Audio('./src/assets/sounds/wrong-long.mp3'),
-  she: new Audio('./src/assets/sounds/She - 1997.mp3'),
-  ceila: new Audio('./src/assets/sounds/Celia Pavey Sings Scarborough Fair Canticle_ The Voice Australia Season 2.mp3')
+  star: new Howl({
+    src: ['./src/assets/sounds/star.ogg', './src/assets/sounds/star.mp3']
+  });
+  click: new Howl({
+    src: ['./src/assets/sounds/click.ogg', './src/assets/sounds/click.mp3']
+  });
+  correct: new Howl({
+    src: ['./src/assets/sounds/correct.ogg', './src/assets/sounds/correct.mp3']
+  });
+  wrong: new Howl({
+    src: ['./src/assets/sounds/wrong.ogg', './src/assets/sounds/wrong.mp3']
+  });
 }
