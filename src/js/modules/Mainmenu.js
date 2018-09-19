@@ -58,20 +58,11 @@ const MainMenu = (() => {
       } else if (e.target.matches(".button-about")) {
         UI.renderMenuDisplay(UI.buttonGroup_about);
       } else if (e.target.matches(".button-playright")) {
-        correct.play();
-        setTimeout(function() {
-          correct.pause();
-        }, 1000)
+        ceila.play();
       } else if (e.target.matches(".button-playwrong")) {
-        wrong.play();
-        setTimeout(function() {
-          wrong.pause();
-        }, 1000)
+        she.play();
       } else if (e.target.matches(".button-playstar")) {
         star.play();
-        setTimeout(function() {
-          star.pause();
-        }, 1000)
       }
     })
   };

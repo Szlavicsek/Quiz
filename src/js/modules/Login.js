@@ -14,7 +14,6 @@ const Login = (() => {
         window.signOut();
       } else {
         $loginCube.classList.add("login-cube-turned")
-        console.log(e.target);
       }
     })
   }
