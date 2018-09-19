@@ -39,13 +39,13 @@ const QuizLogic = (() => {
         }
         this.totalGotRight++;
         this.totalScore += this.scoring();
-        $guessBox.classList.add("correct")
+        $guessBox.classList.add("correct");
       } else {
         if (GeneralSettings.state.sound) {
           sounds.wrong.play();
         }
-        $guessBox.classList.add("wrong")
-        $correctBox.classList.add("correct")
+        $guessBox.classList.add("wrong");
+        $correctBox.classList.add("correct");
       }
       $correctBox.classList.toggle("disable");
       this.currQuestionIndex++;
@@ -77,7 +77,7 @@ const QuizLogic = (() => {
       const resp = await fetch(`https://opentdb.com/api.php?amount=${quantity}${category === null ? "" : "&category=" + category}&difficulty=${difficulty}`);
       json = resp.json();
     } catch (e) {
-      return e
+      return e;
     } finally {
       UI.$loader.style.marginTop = "-3px";
     }
@@ -88,8 +88,8 @@ const QuizLogic = (() => {
     const quantity = settings.quantity;
     const category = settings.category;
     const difficulty = settings.difficulty;
-    fetchQuestions(quantity, category, difficulty)
-      .then(res => {
+    fetchQuestions(quantity, category, difficulty);
+    .then(res => {
         const questions = [...res.results];
         questions.map(q => {
           const randomizedCorrectIndex = Math.floor(Math.random() * 4);
@@ -106,7 +106,7 @@ const QuizLogic = (() => {
         newGame = new Game(questions);
         loadNewQuestion(newGame.getCurrQuestion());
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log(err));
   }
 
   const loadNewQuestion = currQuestion => {
@@ -149,7 +149,7 @@ const QuizLogic = (() => {
       } else if (e.target.matches(".button-quit-game")) {
         quitGame();
       } else if (e.target.matches(".button-stay-here") || e.target.matches(".button-box")) {
-        UI.closeOverlay(document.querySelector('.overlay--in-game'))
+        UI.closeOverlay(document.querySelector('.overlay--in-game'));
       }
     })
   }
