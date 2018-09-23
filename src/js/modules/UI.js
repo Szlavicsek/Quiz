@@ -50,7 +50,7 @@ export const showErrorMessage = (msg, retryCb) => {
 
 const footer = `
   <footer class="footer">
-    <p>Doncimacko 2018 &copy;</p>
+    <p>Szlavicsek 2018 &copy;</p>
   </footer>
 `
 const renderScoreInfo = (newGame) => {
