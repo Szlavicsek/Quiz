@@ -18,7 +18,7 @@ const QuizLogic = (() => {
     }
 
     getCurrQuestion() {
-      return this.questions[this.currQuestionIndex]
+      return this.questions[this.currQuestionIndex];
     }
 
     gameHasEnded() {
@@ -26,7 +26,7 @@ const QuizLogic = (() => {
     }
 
     isCorrect(guessedIndex) {
-      return this.getCurrQuestion().correct_answer_index === guessedIndex
+      return this.getCurrQuestion().correct_answer_index === guessedIndex;
     }
 
     updateScore(isCorrect, guessedIndex, waitTime) {
@@ -103,7 +103,7 @@ const QuizLogic = (() => {
             q.mixed_answers.splice(randomizedCorrectIndex, 0, q.correct_answer);
             q.correct_answer_index = randomizedCorrectIndex;
           }
-        })
+        });
         newGame = new Game(questions);
         loadNewQuestion(newGame.getCurrQuestion());
       })
@@ -111,7 +111,7 @@ const QuizLogic = (() => {
         const message = "Sorry, we couldn't fetch the questions. Please retry later.";
         UI.showErrorMessage(message);
       });
-  }
+  };
 
   const loadNewQuestion = currQuestion => {
     if (currQuestion.type === "multiple") {
@@ -119,7 +119,7 @@ const QuizLogic = (() => {
     } else {
       UI.renderQuestion(UI.boolAnswers, currQuestion.question, currQuestion.mixed_answers, newGame);
     }
-  }
+  };
 
   // click event functions
 
@@ -137,9 +137,9 @@ const QuizLogic = (() => {
         setTimeout(function() {
           document.querySelector('.message').style.opacity = 1;
         }, 500);
-      };
+      }
     }, waitTime);
-  }
+  };
 
   const quitGame = () => {
     const $overlay = document.querySelector('.overlay--in-game');
