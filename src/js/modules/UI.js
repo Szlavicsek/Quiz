@@ -75,7 +75,7 @@ export const buttonGroup_generalSettings = (volume) => {
 }
 
 export const buttonGroup_about = `
-  <p class="aboutText">Lorem ipsum dolor sit amet, consectetur adipisicing elit. A inventore illo maxime, fugiat enim numquam facilis beatae, earum doloremque, veniam id consequuntur aliquam temporibus quo, autem ea impedit. Ipsam, asperiores ea eos cumque autem ut dolorum delectus nesciunt tempore ab <a href="https://loremipsum.io/">more lorem ipsum</a></p>
+  <p class="aboutText">This game is using the Open Trivia database API. Read more <a href="https://opentdb.com/">here</a>.</p>
   <button class="button button-main-menu">Back</button>
 `
 
