@@ -33,7 +33,7 @@ To build the production version, you can run `npm run build`.
 
 ## Authors
 
-itsa me Doncimacko
+Pataki Péter
 
 
 ## License
